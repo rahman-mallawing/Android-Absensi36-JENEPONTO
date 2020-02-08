@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/img_poster"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/txv_group_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@id/img_poster"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="GROUP:"/>
+
+    <TextView
+        android:id="@+id/txv_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_group_label"
+        android:layout_toRightOf="@id/img_poster"
+        android:layout_marginStart="26dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="4"
+        tools:text="@tools:sample/lorem"/>
+
+    <TextView
+        android:id="@+id/txv_hadir_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_group"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/img_poster"
+        android:ellipsize="end"
+        tools:text="Hadir:" />
+
+    <TextView
+        android:id="@+id/txv_hadir1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_hadir_label"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/img_poster"
+        android:ellipsize="end"
+        android:maxLines="4"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/txv_absen_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_hadir1"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/img_poster"
+        android:ellipsize="end"
+        tools:text="Absen: " />
+
+    <TextView
+        android:id="@+id/txv_absen1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txv_absen_label"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/img_poster"
+        android:ellipsize="end"
+        android:maxLines="4"
+        tools:text="@tools:sample/lorem/random" />
+
+</RelativeLayout>
