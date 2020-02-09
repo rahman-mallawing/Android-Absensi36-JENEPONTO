@@ -32,7 +32,7 @@ public class GroupFragment extends Fragment {
     private GroupViewModel groupViewModel;
     private ProgressBar progressBar;
     private GroupListAdapter groupListAdapter;
-    private RecyclerView rcvMovies;
+    private RecyclerView rcvGroup;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,13 +72,13 @@ public class GroupFragment extends Fragment {
                 ViewModelProviders.of(this).get(GroupViewModel.class);
         View view = inflater.inflate(R.layout.fragment_group, container, false);
         progressBar = view.findViewById(R.id.groupProgressBar);
-        rcvMovies = view.findViewById(R.id.rcv_movies);
+        rcvGroup = view.findViewById(R.id.rcv_group);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
 
 
         Log.d("TES-VIEW-MODEL", "1. assdd Connect internet API");
-        rcvMovies.setLayoutManager(new LinearLayoutManager(getContext()));
+        rcvGroup.setLayoutManager(new LinearLayoutManager(getContext()));
         groupListAdapter = new GroupListAdapter();
         groupListAdapter.setItemClickCallback(new GroupListAdapter.OnItemClickCallback() {
             @Override
@@ -88,7 +88,7 @@ public class GroupFragment extends Fragment {
         });
 
         groupListAdapter.notifyDataSetChanged();
-        rcvMovies.setAdapter(groupListAdapter);
+        rcvGroup.setAdapter(groupListAdapter);
 
         //movieViewModel.loadMovieList(getContext());
 
@@ -103,10 +103,10 @@ public class GroupFragment extends Fragment {
         }
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
-            rcvMovies.setVisibility(View.GONE);
+            rcvGroup.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
-            rcvMovies.setVisibility(View.VISIBLE);
+            rcvGroup.setVisibility(View.VISIBLE);
         }
     }
 }

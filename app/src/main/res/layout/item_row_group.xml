@@ -6,78 +6,79 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/img_poster"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:scaleType="fitXY" />
+    <TextView
+        android:id="@+id/tvIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_drawable"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/txv_group_label"
+        android:id="@+id/tv_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_toEndOf="@id/img_poster"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="GROUP:"/>
-
-    <TextView
-        android:id="@+id/txv_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txv_group_label"
-        android:layout_toRightOf="@id/img_poster"
-        android:layout_marginStart="26dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/tvIcon"
+        android:layout_toRightOf="@+id/tvIcon"
+        android:text="tvEmailSender"
         android:textSize="16sp"
-        android:textStyle="bold"
-        android:maxLines="4"
-        tools:text="@tools:sample/lorem"/>
+        android:maxLength="20"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txv_hadir_label"
+        android:id="@+id/tv_hadir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txv_group"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/img_poster"
-        android:ellipsize="end"
-        tools:text="Hadir:" />
+        android:layout_below="@+id/tv_group"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvIcon"
+        android:layout_toRightOf="@+id/tvIcon"
+        android:text="tv_hadir"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txv_hadir1"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_details"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txv_hadir_label"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/img_poster"
+        android:layout_below="@+id/tv_hadir"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tvIcon"
+        android:layout_toRightOf="@+id/tvIcon"
         android:ellipsize="end"
-        android:maxLines="4"
-        tools:text="@tools:sample/lorem/random" />
+        android:maxLines="1"
+        android:text="This is a very long text and we need to show 3...(dots)" />
 
     <TextView
-        android:id="@+id/txv_absen_label"
+        android:id="@+id/tv_month_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txv_hadir1"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/img_poster"
-        android:ellipsize="end"
-        tools:text="Absen: " />
+        android:layout_alignBaseline="@id/tv_group"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="tvEmailTime" />
 
     <TextView
-        android:id="@+id/txv_absen1"
+        android:id="@+id/tv_persen_hadir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txv_absen_label"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/img_poster"
-        android:ellipsize="end"
-        android:maxLines="4"
-        tools:text="@tools:sample/lorem/random" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_month_year"
+        android:padding="5dp"
+        android:text="10.78%"
+        android:textColor="@android:color/holo_red_dark"/>
+
+
+
+
 
 </RelativeLayout>

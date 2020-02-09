@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 public class ApiHelper {
 
     private static final String BASE_URL = "https://rest.api3.annahdahcloudserver.com";
-    private static final String IMG_BASE_URL = "https://rest.api3.annahdahcloudserver.com/identitas_files";
+    private static final String IMG_BASE_URL = "https://rest.api3.annahdahcloudserver.com/identitas_files/";
     private static final String IMG_POSTER_PLACEHOLDER = "https://via.placeholder.com/500x750.jpg";
 
     public static String getImgPosterPlaceholder() {

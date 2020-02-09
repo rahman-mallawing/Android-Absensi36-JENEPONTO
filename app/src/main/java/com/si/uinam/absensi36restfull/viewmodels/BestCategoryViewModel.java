@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CategoryViewModel extends ViewModel {
+public class BestCategoryViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<CategoryModel>> categoryList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
@@ -19,10 +19,6 @@ public class CategoryViewModel extends ViewModel {
 
     public void loadBestCategoryList(Date tgl){
         loadCategoryList(tgl).loadBestCategory();
-    }
-
-    public void loadWorstCategoryList(Date tgl){
-        loadCategoryList(tgl).loadWorstCategory();
     }
 
     private CategoryService loadCategoryList(Date tgl){
