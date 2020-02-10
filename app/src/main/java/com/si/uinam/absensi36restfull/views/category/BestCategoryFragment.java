@@ -25,8 +25,8 @@ import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.viewmodels.BestCategoryViewModel;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,7 +76,7 @@ public class BestCategoryFragment extends Fragment {
             }
         });
 
-        categoryViewModel.loadBestCategoryList(Date.valueOf("2020-01-08"));
+        categoryViewModel.loadBestCategoryList(new Date());
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }

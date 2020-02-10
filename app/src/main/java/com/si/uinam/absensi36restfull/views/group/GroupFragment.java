@@ -24,8 +24,8 @@ import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.models.GroupModel;
 import com.si.uinam.absensi36restfull.viewmodels.GroupViewModel;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GroupFragment extends Fragment {
 
@@ -62,7 +62,7 @@ public class GroupFragment extends Fragment {
             }
         });
 
-        groupViewModel.loadGroupList(Date.valueOf("2020-01-08"));
+        groupViewModel.loadGroupList(new Date());
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
     }
 
