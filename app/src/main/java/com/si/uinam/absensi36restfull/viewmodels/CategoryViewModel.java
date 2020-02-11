@@ -17,15 +17,15 @@ public class CategoryViewModel extends ViewModel {
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
 
-    public void loadBestCategoryList(Date tgl){
+    public void loadBestCategoryList(String tgl){
         loadCategoryList(tgl).loadBestCategory();
     }
 
-    public void loadWorstCategoryList(Date tgl){
+    public void loadWorstCategoryList(String tgl){
         loadCategoryList(tgl).loadWorstCategory();
     }
 
-    private CategoryService loadCategoryList(Date tgl){
+    private CategoryService loadCategoryList(String tgl){
         return CategoryService.create()
                 .setCallback(new ServiceCallbackInterface<CategoryModel>() {
                     @Override

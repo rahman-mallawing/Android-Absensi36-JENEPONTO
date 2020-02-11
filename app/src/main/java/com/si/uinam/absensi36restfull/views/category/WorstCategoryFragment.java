@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.viewmodels.CategoryViewModel;
 
@@ -76,8 +77,8 @@ public class WorstCategoryFragment extends Fragment {
                 showLoading(false);
             }
         });
-
-        categoryViewModel.loadWorstCategoryList(new Date());
+        String tgl = ApiTool.getTodayDateString();
+        categoryViewModel.loadWorstCategoryList(tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }

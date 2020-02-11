@@ -15,13 +15,13 @@ import retrofit2.http.Query;
 public interface ApiEndPointInterface {
 
     @GET("/api/v3/statistik/harian-grup-grup")
-    Call<ArrayList<GroupModel>> getGroupList(@Query("tgl") Date tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
+    Call<ArrayList<GroupModel>> getGroupList(@Query("tgl") String tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
 
     @GET("/api/v3/statistik/presensi-terbaik")
-    Call<ArrayList<CategoryModel>> getBestList(@Query("tgl") Date tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
+    Call<ArrayList<CategoryModel>> getBestList(@Query("tgl") String tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
 
     @GET("/api/v3/statistik/presensi-terburuk")
-    Call<ArrayList<CategoryModel>> getWorstList(@Query("tgl") Date tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
+    Call<ArrayList<CategoryModel>> getWorstList(@Query("tgl") String tgl, @Header("USER-ID") int userId, @Header("TOKEN") String apiKey);
 
     //url= /3/movie/475557/credits?api_key=2f766223589e24c61b0aecdf89ec841d
     @GET("/3/{watchable}/{id}/credits")

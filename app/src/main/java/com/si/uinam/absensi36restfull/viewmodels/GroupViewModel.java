@@ -17,7 +17,7 @@ public class GroupViewModel extends ViewModel {
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
 
-    public void loadGroupList(Date tgl){
+    public void loadGroupList(String tgl){
         GroupService.create()
                 .setCallback(new ServiceCallbackInterface<GroupModel>() {
                     @Override

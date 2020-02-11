@@ -14,10 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+
             <LinearLayout
-                android:id="@+id/ly_profile"
+                android:id="@+id/ly_bg"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="120dp"
                 android:background="@color/colorPrimary"
                 android:paddingBottom="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -28,28 +30,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:text="Username: Admin" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ly_bg"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="@color/colorPrimary"
-                android:paddingBottom="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ly_profile">
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
+                    android:paddingTop="2dp"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:textColor="#f2f2f2"
                     android:gravity="center"
-                    android:text="APLIKASI ABSENSI ONLINE" />
+                    android:text="KEJATI BALI - ABSENSI ONLINE" />
 
             </LinearLayout>
 
@@ -88,7 +74,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18dp"
+                            android:textSize="22dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/darker_gray"
                             android:text="470" />
@@ -114,7 +100,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18dp"
+                            android:textSize="22dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/holo_green_dark"
                             android:text="234" />
@@ -140,7 +126,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18dp"
+                            android:textSize="22dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/holo_blue_dark"
                             android:text="34" />
@@ -166,7 +152,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="18dp"
+                            android:textSize="22dp"
                             android:textStyle="bold"
                             android:textColor="@android:color/holo_red_dark"
                             android:text="21" />
@@ -221,14 +207,15 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/fingerprint_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="Absen Realtime"
+                            android:text="TAK"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -247,14 +234,15 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_group_work_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="Absen Satuan Kerja"
+                            android:text="Dinas Luar"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -273,13 +261,14 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_check_circle_outline_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Cuti"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -298,13 +287,14 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_done_outline_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Izin"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -331,13 +321,14 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_assignment_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Sakit"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -356,13 +347,14 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_donut_small_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Terlambat"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -381,13 +373,14 @@
                             android:layout_marginTop="15dp"
                             android:src="@drawable/ic_done_all_24px"
                             app:civ_border_width="2dp"
-                            app:civ_border_color="#00574B"/>
+                            app:civ_border_color="@android:color/holo_green_dark"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Grafik"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -412,7 +405,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Test Menu"
+                            android:text="Checklog"
+                            android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -425,7 +419,7 @@
             <View
                 android:id="@+id/vw_line2"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="20dp"

@@ -21,9 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.GroupModel;
 import com.si.uinam.absensi36restfull.viewmodels.GroupViewModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -61,9 +64,10 @@ public class GroupFragment extends Fragment {
                 showLoading(false);
             }
         });
-
-        groupViewModel.loadGroupList(new Date());
-        Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
+        String tgl = ApiTool.getTodayDateString();
+        groupViewModel.loadGroupList(tgl);
+        //groupViewModel.loadGroupList(new Date());
+        Log.d("TES-DATE", tgl);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,

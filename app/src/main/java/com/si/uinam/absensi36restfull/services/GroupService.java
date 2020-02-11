@@ -17,7 +17,7 @@ public class GroupService {
 
     private static int USER_ID = 36;
     private static String API_KEY = "NYTpub4A3SW5ii1q6bemy20Qc5bCDLncdmoFUROsw1Z9m2JsPobpoQgj8xgsGUxMdBn4uhXHQxwsThp7JIyHG5qwD5ieNvfTYlMt";
-    private Date tgl;
+    private String tgl;
 
     private ApiEndPointInterface groupService;
     private WeakReference<ServiceCallbackInterface> serviceCallbackInterfaceWeakReference;
@@ -38,7 +38,7 @@ public class GroupService {
         return this;
     }
 
-    public GroupService setDateParam(Date tgl) {
+    public GroupService setDateParam(String tgl) {
         this.tgl = tgl;
         return this;
     }

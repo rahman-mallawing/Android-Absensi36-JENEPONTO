@@ -16,7 +16,7 @@ public class CategoryService {
 
     private static int USER_ID = 36;
     private static String API_KEY = "NYTpub4A3SW5ii1q6bemy20Qc5bCDLncdmoFUROsw1Z9m2JsPobpoQgj8xgsGUxMdBn4uhXHQxwsThp7JIyHG5qwD5ieNvfTYlMt";
-    private Date tgl;
+    private String tgl;
 
     private ApiEndPointInterface categoryService;
     private WeakReference<ServiceCallbackInterface> serviceCallbackInterfaceWeakReference;
@@ -37,7 +37,7 @@ public class CategoryService {
         return this;
     }
 
-    public CategoryService setDateParam(Date tgl) {
+    public CategoryService setDateParam(String tgl) {
         this.tgl = tgl;
         return this;
     }
