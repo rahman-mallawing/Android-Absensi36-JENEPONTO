@@ -3,6 +3,7 @@ package com.si.uinam.absensi36restfull.services;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.models.GroupModel;
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
+import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.models.UserModel;
 
@@ -42,5 +43,9 @@ public interface ApiService {
 
     @GET("/api/v3/statistik/bulanan-tahun")
     Call<ArrayList<StaBulananTahunModel>> getStatistikBulananTahun(
+            @Query("tgl") String tgl);
+
+    @GET("/api/v3/statistik/hari-hari-bulan")
+    Call<ArrayList<StaHarianBulanModel>> getStatistikHarianBulan(
             @Query("tgl") String tgl);
 }

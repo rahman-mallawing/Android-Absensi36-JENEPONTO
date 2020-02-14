@@ -3,6 +3,7 @@ package com.si.uinam.absensi36restfull.services;
 import android.util.Log;
 
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
+import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeServiceCallback;
 
@@ -96,6 +97,36 @@ public class HomeService {
 
             @Override
             public void onFailure(Call<ArrayList<StaBulananTahunModel>> call, Throwable t) {
+                Log.d("RETROFIT-TEST-ERROR", t.getMessage());
+                onFailureExecuted(t.getMessage());
+            }
+        });
+
+        Call<ArrayList<StaHarianBulanModel>> call3 = appService.getApiService()
+                .getStatistikHarianBulan(tgl);
+
+        call3.enqueue(new Callback<ArrayList<StaHarianBulanModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<StaHarianBulanModel>> call, Response<ArrayList<StaHarianBulanModel>> response) {
+                Log.d("RETROFIT-123456", response.raw().toString());
+                //onResponseReceived(response.body());
+                if(response.isSuccessful()){
+                    //Intent loginIntent = new Intent(GroupFragment.this, LoginActivity.class);
+                    //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+                    //startActivity(loginIntent);
+                    Log.d("RETROFIT-TEST-ERROR2", response.body().toString());
+                    Log.i("ASYN_TAG", "onPreExecute inside DemoAsynch class");
+                    HomeServiceCallback myListener = homeServiceCallbackWeakReference.get();
+                    if(myListener != null){
+                        myListener.onStaHariBulanExecute(response.body());
+                    }
+                }else{
+                    onFailureExecuted(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<StaHarianBulanModel>> call, Throwable t) {
                 Log.d("RETROFIT-TEST-ERROR", t.getMessage());
                 onFailureExecuted(t.getMessage());
             }

@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -51,10 +52,12 @@ import com.si.uinam.absensi36restfull.MyMarkerView;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
+import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +102,6 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
                 tvDinas.setText(String.valueOf(statistikModel.getDinasLuar()));
                 tvTak.setText(String.valueOf(statistikModel.getAbsen()));
                 fillPieChart(statistikModel);
-                //fillLineChart();
                 showLoading(false);
             }
         });
@@ -107,6 +109,13 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
             @Override
             public void onChanged(ArrayList<StaBulananTahunModel> staBulananTahunModels) {
                 fillBarChart(staBulananTahunModels);
+                showLoading(false);
+            }
+        });
+        homeViewModel.getStaHarianBulanList().observe(this, new Observer<ArrayList<StaHarianBulanModel>>() {
+            @Override
+            public void onChanged(ArrayList<StaHarianBulanModel> staHarianBulanModels) {
+                fillLineChart(staHarianBulanModels);
                 showLoading(false);
             }
         });
@@ -146,7 +155,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         chartLine = root.findViewById(R.id.chart_line);
         chartPie = root.findViewById(R.id.chart_pie);
 
-
+        /*
         chartLine.setTouchEnabled(true);
         chartLine.setPinchZoom(true);
         chart.setScaleEnabled(false);
@@ -156,10 +165,12 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         chartLine.setMarker(mv);
 
         renderData();
+
+         */
         return root;
     }
 
-    public void renderData() {
+    public void renderData(ArrayList<StaHarianBulanModel> staHarianBulanModels) {
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
         llXAxis.setLineWidth(4f);
         llXAxis.enableDashedLine(10f, 10f, 0f);
@@ -168,17 +179,19 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
 
         XAxis xAxis = chartLine.getXAxis();
         xAxis.enableGridDashedLine(10f, 10f, 0f);
-        xAxis.setAxisMaximum(10f);
+        xAxis.setAxisMaximum(31f);
         xAxis.setAxisMinimum(0f);
         xAxis.setDrawLimitLinesBehindData(true);
 
-        LimitLine ll1 = new LimitLine(215f, "Maximum Limit");
+        float jumPegawai = (float)staHarianBulanModels.get(0).getJumlahPegawai();
+
+        LimitLine ll1 = new LimitLine(jumPegawai, "Maximum Limit");
         ll1.setLineWidth(4f);
         ll1.enableDashedLine(10f, 10f, 0f);
         ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
         ll1.setTextSize(10f);
 
-        LimitLine ll2 = new LimitLine(70f, "Minimum Limit");
+        LimitLine ll2 = new LimitLine((float)0.2f*jumPegawai, "Minimum Limit");
         ll2.setLineWidth(4f);
         ll2.enableDashedLine(10f, 10f, 0f);
         ll2.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
@@ -188,19 +201,25 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         leftAxis.removeAllLimitLines();
         leftAxis.addLimitLine(ll1);
         leftAxis.addLimitLine(ll2);
-        leftAxis.setAxisMaximum(350f);
-        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(jumPegawai+50f);
+        leftAxis.setAxisMinimum(-(float)0.3f*jumPegawai);
         leftAxis.enableGridDashedLine(10f, 10f, 0f);
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawLimitLinesBehindData(false);
 
         chartLine.getAxisRight().setEnabled(false);
-        setData();
+        setData(staHarianBulanModels);
     }
 
-    private void setData() {
+    private void setData(ArrayList<StaHarianBulanModel> staHarianBulanModels) {
 
         ArrayList<Entry> values = new ArrayList<>();
+        Entry c1e1;
+        for(StaHarianBulanModel item : staHarianBulanModels){
+            c1e1 = new Entry(item.getDayOfMonth(), (float) item.getHadir());
+            values.add(c1e1);
+        }
+        /*
         values.add(new Entry(1, 50));
         values.add(new Entry(2, 100));
         values.add(new Entry(3, 80));
@@ -209,6 +228,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         values.add(new Entry(7, 150));
         values.add(new Entry(8, 250));
         values.add(new Entry(9, 190));
+         */
 
         LineDataSet set1;
         if (chartLine.getData() != null &&
@@ -265,7 +285,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         chart.setDrawGridBackground(false);
 
 
-        int groupCount = 6;
+        int groupCount = 12;
 
         ArrayList xVals = new ArrayList();
 
@@ -340,15 +360,32 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
 
     }
 
-    private void fillLineChart(){
-        List<Entry> valsComp1 = new ArrayList<Entry>();
+    private void fillLineChart(ArrayList<StaHarianBulanModel> staHarianBulanModels){
+
+        chartLine.setTouchEnabled(true);
+        chartLine.setPinchZoom(true);
+        chart.setScaleEnabled(false);
+
+        MyMarkerView mv = new MyMarkerView(getActivity().getApplicationContext(), R.layout.custom_marker_view);
+        mv.setChartView(chartLine);
+        chartLine.setMarker(mv);
+
+        renderData(staHarianBulanModels);
+
+        /* List<Entry> valsComp1 = new ArrayList<Entry>();
         Entry c1e1;
 
+        /*
         for (int i = 1; i < 31; i++) {
             c1e1 = new Entry(i, (float) (Math.random() * 40) ); // 0 == quarter 1
             valsComp1.add(c1e1);
         }
 
+
+        for(StaHarianBulanModel item : staHarianBulanModels){
+            c1e1 = new Entry(item.getDayOfMonth(), (float) item.getHadir());
+            valsComp1.add(c1e1);
+        }
 
 
         LineDataSet setComp1 = new LineDataSet(valsComp1, "Kehadiran Harian");
@@ -359,7 +396,14 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         dataSets2.add(setComp1);
         LineData dataLine = new LineData(dataSets2);
         chartLine.setData(dataLine);
+        String bulan = new SimpleDateFormat("MMM").format(staHarianBulanModels.get(0).getTgl());
+        String tahun = new SimpleDateFormat("YYYY").format(staHarianBulanModels.get(0).getTgl());
+        Description desc = new Description();
+        desc.setText("Kehadiran "+bulan+" "+tahun);
+        chartLine.setDescription(desc);
         chartLine.invalidate(); // refresh
+
+         */
     }
 
     private void fillPieChart(StatistikModel stm){
