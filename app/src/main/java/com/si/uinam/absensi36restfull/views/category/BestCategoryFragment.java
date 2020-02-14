@@ -1,6 +1,7 @@
 package com.si.uinam.absensi36restfull.views.category;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -21,9 +22,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
+import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.BestCategoryViewModel;
 
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BestCategoryFragment extends Fragment {
+public class BestCategoryFragment extends Fragment implements AuthenticationListener {
 
     private BestCategoryViewModel categoryViewModel;
     private ProgressBar progressBar;
@@ -77,7 +80,7 @@ public class BestCategoryFragment extends Fragment {
             }
         });
         String tgl = ApiTool.getTodayDateString();
-        categoryViewModel.loadBestCategoryList(tgl);
+        categoryViewModel.loadBestCategoryList(this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }
@@ -129,4 +132,12 @@ public class BestCategoryFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onUserLoggedOut() {
+        Log.d("TES-LOGOUT", "onUserLoggedOut");
+        //showLoading(false);
+        Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+        startActivity(loginIntent);
+    }
 }

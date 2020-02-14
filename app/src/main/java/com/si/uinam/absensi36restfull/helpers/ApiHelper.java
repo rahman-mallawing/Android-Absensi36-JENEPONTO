@@ -4,11 +4,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.si.uinam.absensi36restfull.models.UserModel;
+
 public class ApiHelper {
 
     private static final String BASE_URL = "https://rest.api3.annahdahcloudserver.com";
     private static final String IMG_BASE_URL = "https://rest.api3.annahdahcloudserver.com/identitas_files/";
     private static final String IMG_POSTER_PLACEHOLDER = "https://via.placeholder.com/500x750.jpg";
+
+    private static int USER_ID;
+    private static String API_KEY;
+    private static String API_NAME;
+    private static String API_EMAIL;
+
+    public static int getTokenId() {
+        return USER_ID;
+    }
+
+    public static String getToken() {
+        return API_KEY;
+    }
 
     public static String getImgPosterPlaceholder() {
         return IMG_POSTER_PLACEHOLDER;
@@ -22,8 +37,8 @@ public class ApiHelper {
         return IMG_BASE_URL;
     }
 
-    private static int USER_ID = -1;
-    private static String API_KEY = null;
+    //private static int USER_ID = -1;
+    //private static String API_KEY = null;
 
     public static int getUserId(Context context) {
         if(USER_ID > -1){
@@ -41,14 +56,55 @@ public class ApiHelper {
         return API_KEY;
     }
 
-    public static void setApiIdentity(Context context, int user_id, String api_key){
+    public static void saveUser(Context context, UserModel user){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("USER_ID",USER_ID);
-        editor.putString("API_KEY",API_KEY);
+        editor.putInt("USER_ID",user.getId());
+        editor.putString("API_KEY",user.getApiToken());
+        editor.putString("API_NAME",user.getNamaOperator());
+        editor.putString("API_EMAIL",user.getEmail());
         editor.apply();
-        USER_ID = user_id;
-        API_KEY = api_key;
+        USER_ID = user.getId();
+        API_KEY = user.getApiToken();
+        API_NAME = user.getNamaOperator();
+        API_EMAIL = user.getEmail();
+    }
+
+    public static void invalidate(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("USER_ID");
+        editor.remove("API_KEY");
+        editor.remove("API_NAME");
+        editor.remove("API_EMAIL");
+        USER_ID = 0;
+        API_KEY = "";
+        API_NAME = "";
+        API_EMAIL = "";
+        editor.apply();
+    }
+
+    public static void simpleInvalidate(){
+        USER_ID = 0;
+        API_KEY = "";
+        API_NAME = "";
+        API_EMAIL = "";
+    }
+
+    public static int getUserId() {
+        return USER_ID;
+    }
+
+    public static String getApiKey() {
+        return API_KEY;
+    }
+
+    public static String getApiName() {
+        return API_NAME;
+    }
+
+    public static String getApiEmail() {
+        return API_EMAIL;
     }
 
     private static void loadApiIdentity(Context context){

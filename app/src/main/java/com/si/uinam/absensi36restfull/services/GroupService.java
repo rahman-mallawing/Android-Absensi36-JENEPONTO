@@ -1,9 +1,14 @@
 package com.si.uinam.absensi36restfull.services;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.si.uinam.absensi36restfull.LoginActivity;
+import com.si.uinam.absensi36restfull.MainActivity;
 import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.models.GroupModel;
+import com.si.uinam.absensi36restfull.views.group.GroupFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -15,21 +20,18 @@ import retrofit2.Response;
 
 public class GroupService {
 
-    private static int USER_ID = 36;
-    private static String API_KEY = "NYTpub4A3SW5ii1q6bemy20Qc5bCDLncdmoFUROsw1Z9m2JsPobpoQgj8xgsGUxMdBn4uhXHQxwsThp7JIyHG5qwD5ieNvfTYlMt";
     private String tgl;
 
-    private ApiEndPointInterface groupService;
+    private App groupService;
     private WeakReference<ServiceCallbackInterface> serviceCallbackInterfaceWeakReference;
 
-    public GroupService(ApiEndPointInterface groupService) {
+    public GroupService(App groupService) {
         this.groupService = groupService;
     }
 
-    public static GroupService create() {
+    public static GroupService create(AuthenticationListener authenticationListener) {
         return new GroupService(
-                RetrofitClientInstance.getRetrofitInstance()
-                        .create(ApiEndPointInterface.class)
+                App.getAppInstance(authenticationListener)
         );
     }
 
@@ -44,12 +46,26 @@ public class GroupService {
     }
 
     public void execute(){
-        Call<ArrayList<GroupModel>> call = groupService.getGroupList(tgl, USER_ID, API_KEY);
+        Call<ArrayList<GroupModel>> call = groupService.getApiService().
+                getGroupList(tgl);
+        //App app = new App();
+        //app.setAuthenticationListener(this.context);
+        //Call<ArrayList<GroupModel>> call = app.getApiService().getGroupList(tgl, USER_ID, API_KEY);
         call.enqueue(new Callback<ArrayList<GroupModel>>() {
             @Override
             public void onResponse(Call<ArrayList<GroupModel>> call, Response<ArrayList<GroupModel>> response) {
-                Log.d("RETROFIT-TEST-ERROR2", response.body().toString());
-                onResponseReceived(response.body());
+               // Log.d("RETROFIT-123456", response.body().toString());
+                Log.d("RETROFIT-123456", response.raw().toString());
+                //onResponseReceived(response.body());
+                if(response.isSuccessful()){
+                    //Intent loginIntent = new Intent(GroupFragment.this, LoginActivity.class);
+                    //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+                    //startActivity(loginIntent);
+                    Log.d("RETROFIT-TEST-ERROR2", response.body().toString());
+                    onResponseReceived(response.body());
+                }else{
+                    onFailureExecuted(response.message());
+                }
             }
 
             @Override

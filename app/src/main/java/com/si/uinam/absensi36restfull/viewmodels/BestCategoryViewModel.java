@@ -1,6 +1,7 @@
 package com.si.uinam.absensi36restfull.viewmodels;
 
 import com.si.uinam.absensi36restfull.models.CategoryModel;
+import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.services.CategoryService;
 import com.si.uinam.absensi36restfull.services.ServiceCallbackInterface;
 
@@ -17,16 +18,21 @@ public class BestCategoryViewModel extends ViewModel {
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
 
-    public void loadBestCategoryList(String tgl){
-        loadCategoryList(tgl).loadBestCategory();
+    public void loadBestCategoryList(AuthenticationListener authenticationListener, String tgl){
+        loadCategoryList(authenticationListener, tgl).loadBestCategory();
     }
 
-    private CategoryService loadCategoryList(String tgl){
-        return CategoryService.create()
-                .setCallback(new ServiceCallbackInterface<CategoryModel>() {
+    private CategoryService loadCategoryList(AuthenticationListener authenticationListener, String tgl){
+        return CategoryService.create(authenticationListener)
+                .setCallback(new ServiceCallbackInterface<CategoryModel, Object>() {
                     @Override
                     public void onPostExecute(ArrayList<CategoryModel> arrayList) {
                         categoryList.setValue(arrayList);
+                    }
+
+                    @Override
+                    public void onPostExecute(Object tObject) {
+
                     }
 
                     @Override

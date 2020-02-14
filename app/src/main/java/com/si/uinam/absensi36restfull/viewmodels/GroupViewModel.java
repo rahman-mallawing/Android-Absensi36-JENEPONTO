@@ -1,6 +1,10 @@
 package com.si.uinam.absensi36restfull.viewmodels;
 
+import android.content.Context;
+
 import com.si.uinam.absensi36restfull.models.GroupModel;
+import com.si.uinam.absensi36restfull.services.App;
+import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.services.GroupService;
 import com.si.uinam.absensi36restfull.services.ServiceCallbackInterface;
 
@@ -16,13 +20,17 @@ public class GroupViewModel extends ViewModel {
     private MutableLiveData<ArrayList<GroupModel>> groupList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-
-    public void loadGroupList(String tgl){
-        GroupService.create()
-                .setCallback(new ServiceCallbackInterface<GroupModel>() {
+    public void loadGroupList(AuthenticationListener authenticationListener, String tgl){
+        GroupService.create(authenticationListener)
+                .setCallback(new ServiceCallbackInterface<GroupModel, Object>() {
                     @Override
                     public void onPostExecute(ArrayList<GroupModel> arrayList) {
                         groupList.setValue(arrayList);
+                    }
+
+                    @Override
+                    public void onPostExecute(Object tObject) {
+
                     }
 
                     @Override

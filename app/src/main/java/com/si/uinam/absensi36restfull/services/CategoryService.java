@@ -14,21 +14,18 @@ import retrofit2.Response;
 
 public class CategoryService {
 
-    private static int USER_ID = 36;
-    private static String API_KEY = "NYTpub4A3SW5ii1q6bemy20Qc5bCDLncdmoFUROsw1Z9m2JsPobpoQgj8xgsGUxMdBn4uhXHQxwsThp7JIyHG5qwD5ieNvfTYlMt";
     private String tgl;
 
-    private ApiEndPointInterface categoryService;
+    private App categoryService;
     private WeakReference<ServiceCallbackInterface> serviceCallbackInterfaceWeakReference;
 
-    public CategoryService(ApiEndPointInterface categoryService) {
+    public CategoryService(App categoryService) {
         this.categoryService = categoryService;
     }
 
-    public static CategoryService create() {
+    public static CategoryService create(AuthenticationListener authenticationListener) {
         return new CategoryService(
-                RetrofitClientInstance.getRetrofitInstance()
-                        .create(ApiEndPointInterface.class)
+                App.getAppInstance(authenticationListener)
         );
     }
 
@@ -43,12 +40,16 @@ public class CategoryService {
     }
 
     public void loadBestCategory(){
-        Call<ArrayList<CategoryModel>> call = categoryService.getBestList(tgl, USER_ID, API_KEY);
+        Call<ArrayList<CategoryModel>> call = categoryService.
+                getApiService().
+                getBestList(tgl);
         execute(call);
     }
 
     public void loadWorstCategory(){
-        Call<ArrayList<CategoryModel>> call = categoryService.getWorstList(tgl, USER_ID, API_KEY);
+        Call<ArrayList<CategoryModel>> call = categoryService.
+                getApiService().
+                getWorstList(tgl);
         execute(call);
     }
 
@@ -56,8 +57,17 @@ public class CategoryService {
         call.enqueue(new Callback<ArrayList<CategoryModel>>() {
             @Override
             public void onResponse(Call<ArrayList<CategoryModel>> call, Response<ArrayList<CategoryModel>> response) {
-                Log.d("RETROFIT-TEST-ERROR2", response.body().toString());
-                onResponseReceived(response.body());
+                Log.d("RETROFIT-123456", response.raw().toString());
+                if(response.isSuccessful()){
+                    //Intent loginIntent = new Intent(GroupFragment.this, LoginActivity.class);
+                    //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+                    //startActivity(loginIntent);
+                    Log.d("RETROFIT-TEST-ERROR2", response.body().toString());
+                    onResponseReceived(response.body());
+                }else{
+                    onFailureExecuted(response.message());
+                }
+
             }
 
             @Override

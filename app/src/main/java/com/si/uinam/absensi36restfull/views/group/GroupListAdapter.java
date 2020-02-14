@@ -119,7 +119,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
                 tvPersenHadir.setTextColor(Color.GRAY);
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GRAY);
             }
-            String details = "Terlambat: "+ groupModel.getJumlahTerlambat() +", Dinas Luar: "+ groupModel.getDinasLuar() +", Cuti: "+ groupModel.getCuti() +", Izin: "+ groupModel.getIzin() +", Lain-lain: "+", Cepat Pulang: "+ groupModel.getJumlahCp() + groupModel.getLainLain();
+            String details = "Terlambat: "+ groupModel.getJumlahTerlambat() +", Dinas Luar: "+ groupModel.getDinasLuar() +", Cuti: "+ groupModel.getCuti() +", Izin: "+ groupModel.getIzin();
             tvDetails.setText(details);
             mIcon.setText(String.valueOf(hrf).toUpperCase());
             Random mRandom = new Random();
