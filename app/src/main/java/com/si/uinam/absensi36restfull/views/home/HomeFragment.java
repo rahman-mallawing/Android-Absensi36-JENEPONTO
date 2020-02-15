@@ -44,16 +44,19 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.MyMarkerView;
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
 import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
+import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
 
@@ -62,24 +65,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements AuthenticationListener {
-
-
-
-    //gerid
-    GridView androidGridView;
-
-    String[] gridViewString = {
-            "Alram", "Android", "Mobile", "Website", "Profile", "WordPress",
-            "Alram", "Android", "Mobile", "Website", "Profile", "WordPress",
-            "Alram", "Android", "Mobile", "Website", "Profile", "WordPress",
-
-    } ;
-    int[] gridViewImageId = {
-            R.drawable.rounded_drawable, R.drawable.user, R.drawable.placeholder, R.drawable.rounded_drawable, R.drawable.user, R.drawable.placeholder,
-            R.drawable.user, R.drawable.placeholder, R.drawable.rounded_drawable, R.drawable.user, R.drawable.placeholder, R.drawable.rounded_drawable,
-            R.drawable.placeholder, R.drawable.rounded_drawable, R.drawable.user, R.drawable.placeholder, R.drawable.rounded_drawable, R.drawable.user,
-
-    };
 
     private HomeViewModel homeViewModel;
     private ProgressBar homeProgressBar;
@@ -132,7 +117,13 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
                 showLoading(false);
             }
         });
-        homeViewModel.loadStatistik(this, ApiTool.getTodayDateString());
+        Log.d("LOG-USER","CEK LOGIN:home fragment activity");
+        if(!ApiHelper.isLogged(getActivity())){
+            onUserLoggedOut();
+        }else {
+            homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString());
+        }
+
         //chartLine = findViewById(R.id.chart);
 //
 
@@ -265,6 +256,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
             dataSets.add(set1);
             LineData data = new LineData(dataSets);
             chartLine.setData(data);
+            chartLine.invalidate();
         }
     }
 
@@ -277,7 +269,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
 
         barWidth = 0.3f;
         barSpace = 0f;
-        groupSpace = 0.4f;
+        groupSpace = 0.2f;
         chart.setDescription(null);
         chart.setPinchZoom(false);
         chart.setScaleEnabled(false);
@@ -295,35 +287,39 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         xVals.add("Apr");
         xVals.add("May");
         xVals.add("Jun");
+        xVals.add("Jul");
+        xVals.add("Aug");
+        xVals.add("Sep");
+        xVals.add("Oct");
+        xVals.add("Nov");
+        xVals.add("Dec");
 
         ArrayList yVals1 = new ArrayList();
         ArrayList yVals2 = new ArrayList();
+        ArrayList yVals3 = new ArrayList();
 
-        yVals1.add(new BarEntry(1, (float) 12));
-        yVals2.add(new BarEntry(1, (float) 2));
-        yVals1.add(new BarEntry(2, (float) 3));
-        yVals2.add(new BarEntry(2, (float) 14));
-        yVals1.add(new BarEntry(3, (float) 5));
-        yVals2.add(new BarEntry(3, (float) 6));
-        yVals1.add(new BarEntry(4, (float) 7));
-        yVals2.add(new BarEntry(4, (float) 8));
-        yVals1.add(new BarEntry(5, (float) 9));
-        yVals2.add(new BarEntry(5, (float) 10));
-        yVals1.add(new BarEntry(6, (float) 11));
-        yVals2.add(new BarEntry(6, (float) 12));
+        for(int i=0; i<staBulananTahunModels.size(); i++){
+            int jumPeg = staBulananTahunModels.get(i).getJumlahPegawai();
+            int jumHari = staBulananTahunModels.get(i).getJumlahHari();
+            //yVals1.add(new BarEntry(i, (float) jumPeg));
+            yVals2.add(new BarEntry(i, (float) staBulananTahunModels.get(i).getHadirXPegawai()/jumHari));
+            yVals3.add(new BarEntry(i, (float) staBulananTahunModels.get(i).getAbsenXPegawai()/jumHari));
+        }
 
-
-        BarDataSet set1, set2;
-        set1 = new BarDataSet(yVals1, "A");
-        set1.setColor(Color.BLUE);
-        set2 = new BarDataSet(yVals2, "B");
+        BarDataSet set1, set2, set3;
+        //set1 = new BarDataSet(yVals1, "JumPegawai");
+        //set1.setColor(Color.BLUE);
+        set2 = new BarDataSet(yVals2, "Rata-rataHadir");
         set2.setColor(Color.rgb(0, 155, 0));
-        BarData data = new BarData(set1, set2);
+        set3 = new BarDataSet(yVals3, "Rata-rataAbsen");
+        set3.setColor(Color.RED);
+        BarData data = new BarData(set2, set3);
         data.setValueFormatter(new LargeValueFormatter());
         chart.setData(data);
         chart.getBarData().setBarWidth(barWidth);
         chart.getXAxis().setAxisMinimum(0);
         chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
+        //chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xVals));
         chart.groupBars(0, groupSpace, barSpace);
         chart.getData().setHighlightEnabled(false);
         chart.invalidate();
@@ -337,18 +333,22 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         l.setYOffset(20f);
         l.setXOffset(0f);
         l.setYEntrySpace(0f);
-        l.setTextSize(8f);
+        l.setTextSize(6f);
 
 
         //X-axis
         XAxis xAxis = chart.getXAxis();
         xAxis.setGranularity(1f);
+        xAxis.setLabelRotationAngle(+90);
+        xAxis.setTextSize(6f);
         xAxis.setGranularityEnabled(true);
         xAxis.setCenterAxisLabels(true);
         xAxis.setDrawGridLines(false);
-        xAxis.setAxisMaximum(6);
+        xAxis.setLabelCount(12);
+        //xAxis.setAxisMaximum(13);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xVals));
+        Log.d("BAR",String.valueOf(chart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount));
 //Y-axis
         chart.getAxisRight().setEnabled(false);
         YAxis leftAxis = chart.getAxisLeft();
@@ -362,7 +362,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
 
     private void fillLineChart(ArrayList<StaHarianBulanModel> staHarianBulanModels){
 
-        chartLine.setTouchEnabled(true);
+        chartLine.setTouchEnabled(false);
         chartLine.setPinchZoom(true);
         chart.setScaleEnabled(false);
 
@@ -456,7 +456,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
-        //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(loginIntent);
     }
 }

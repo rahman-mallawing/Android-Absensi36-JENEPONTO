@@ -20,8 +20,8 @@ public class GroupViewModel extends ViewModel {
     private MutableLiveData<ArrayList<GroupModel>> groupList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-    public void loadGroupList(AuthenticationListener authenticationListener, String tgl){
-        GroupService.create(authenticationListener)
+    public void loadGroupList(Context context, AuthenticationListener authenticationListener, String tgl){
+        GroupService.create(context, authenticationListener)
                 .setCallback(new ServiceCallbackInterface<GroupModel, Object>() {
                     @Override
                     public void onPostExecute(ArrayList<GroupModel> arrayList) {

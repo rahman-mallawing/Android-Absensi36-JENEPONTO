@@ -81,7 +81,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
             }
         });
         String tgl = ApiTool.getTodayDateString();
-        categoryViewModel.loadWorstCategoryList(this, tgl);
+        categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }
@@ -137,6 +137,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
         startActivity(loginIntent);
     }

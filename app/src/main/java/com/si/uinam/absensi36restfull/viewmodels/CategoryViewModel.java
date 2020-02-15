@@ -1,5 +1,7 @@
 package com.si.uinam.absensi36restfull.viewmodels;
 
+import android.content.Context;
+
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.services.CategoryService;
@@ -17,17 +19,8 @@ public class CategoryViewModel extends ViewModel {
     private MutableLiveData<ArrayList<CategoryModel>> categoryList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-
-    public void loadBestCategoryList(AuthenticationListener authenticationListener, String tgl){
-        loadCategoryList(authenticationListener, tgl).loadBestCategory();
-    }
-
-    public void loadWorstCategoryList(AuthenticationListener authenticationListener, String tgl){
-        loadCategoryList(authenticationListener, tgl).loadWorstCategory();
-    }
-
-    private CategoryService loadCategoryList(AuthenticationListener authenticationListener, String tgl){
-        return CategoryService.create(authenticationListener)
+    public void loadWorstCategoryList(Context context, AuthenticationListener authenticationListener, String tgl){
+        CategoryService.create(context, authenticationListener)
                 .setCallback(new ServiceCallbackInterface<CategoryModel, Object>() {
                     @Override
                     public void onPostExecute(ArrayList<CategoryModel> arrayList) {
@@ -44,7 +37,8 @@ public class CategoryViewModel extends ViewModel {
                         errorMessage.setValue(err);
                     }
                 })
-                .setDateParam(tgl);
+                .setDateParam(tgl)
+        .loadWorstCategory();
     }
 
 

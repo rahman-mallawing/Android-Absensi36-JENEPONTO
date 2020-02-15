@@ -29,9 +29,9 @@ public class GroupService {
         this.groupService = groupService;
     }
 
-    public static GroupService create(AuthenticationListener authenticationListener) {
+    public static GroupService create(Context context, AuthenticationListener authenticationListener) {
         return new GroupService(
-                App.getAppInstance(authenticationListener)
+                App.getAppInstance(context,authenticationListener)
         );
     }
 
@@ -46,6 +46,7 @@ public class GroupService {
     }
 
     public void execute(){
+
         Call<ArrayList<GroupModel>> call = groupService.getApiService().
                 getGroupList(tgl);
         //App app = new App();

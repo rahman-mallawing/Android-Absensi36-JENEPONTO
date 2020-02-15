@@ -1,5 +1,6 @@
 package com.si.uinam.absensi36restfull.services;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.si.uinam.absensi36restfull.models.CategoryModel;
@@ -23,9 +24,9 @@ public class CategoryService {
         this.categoryService = categoryService;
     }
 
-    public static CategoryService create(AuthenticationListener authenticationListener) {
+    public static CategoryService create(Context context, AuthenticationListener authenticationListener) {
         return new CategoryService(
-                App.getAppInstance(authenticationListener)
+                App.getAppInstance(context, authenticationListener)
         );
     }
 

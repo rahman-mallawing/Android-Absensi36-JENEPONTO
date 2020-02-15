@@ -1,5 +1,6 @@
 package com.si.uinam.absensi36restfull.services;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
@@ -25,9 +26,9 @@ public class HomeService {
         this.appService = appService;
     }
 
-    public static HomeService create(AuthenticationListener authenticationListener) {
+    public static HomeService create(Context context, AuthenticationListener authenticationListener) {
         return new HomeService(
-                App.getAppInstance(authenticationListener)
+                App.getAppInstance(context, authenticationListener)
         );
     }
 

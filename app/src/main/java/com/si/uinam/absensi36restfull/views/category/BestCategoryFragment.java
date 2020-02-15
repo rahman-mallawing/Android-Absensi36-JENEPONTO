@@ -80,7 +80,7 @@ public class BestCategoryFragment extends Fragment implements AuthenticationList
             }
         });
         String tgl = ApiTool.getTodayDateString();
-        categoryViewModel.loadBestCategoryList(this, tgl);
+        categoryViewModel.loadBestCategoryList(getActivity(),this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }
@@ -137,6 +137,7 @@ public class BestCategoryFragment extends Fragment implements AuthenticationList
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
         startActivity(loginIntent);
     }

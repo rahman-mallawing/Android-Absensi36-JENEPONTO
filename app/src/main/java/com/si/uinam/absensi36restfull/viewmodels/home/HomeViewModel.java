@@ -1,5 +1,7 @@
 package com.si.uinam.absensi36restfull.viewmodels.home;
 
+import android.content.Context;
+
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
 import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
@@ -20,8 +22,8 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<ArrayList<StaHarianBulanModel>> staHarianBulanList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
 
-    public void loadStatistik(AuthenticationListener authenticationListener, String tgl){
-        HomeService.create(authenticationListener)
+    public void loadStatistik(Context context, AuthenticationListener authenticationListener, String tgl){
+        HomeService.create(context, authenticationListener)
                 .setCallback(new HomeServiceCallback() {
                     @Override
                     public void onStatistikHarianExecute(StatistikModel statistikModel) {

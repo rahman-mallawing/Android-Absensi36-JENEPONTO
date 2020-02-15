@@ -20,16 +20,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
     private Session session;
-    private ApiService apiService;
+    private ApiService apiService, loginService;
     private AuthenticationListener authenticationListener;
+    private Context context;
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     private static App app;
 
-    public static App getAppInstance(AuthenticationListener authListener) {
+    public static App getAppInstance(Context context, AuthenticationListener authListener) {
         if (app == null) {
             app = new App();
         }
         app.setAuthenticationListener(authListener);
+        app.setContext(context);
         return app;
     }
 
@@ -43,7 +49,7 @@ public class App extends Application {
             session = new Session() {
                 @Override
                 public boolean isLoggedIn() {
-                    return true;
+                    return ApiHelper.isLogged(getApplicationContext());
                 }
 
                 @Override
@@ -53,28 +59,28 @@ public class App extends Application {
 
                 @Override
                 public String getToken() {
-                    return ApiHelper.getToken();
+                    return ApiHelper.getApiKey(context);
                 }
 
                 @Override
                 public int getTokenId() {
-                    return ApiHelper.getTokenId();
+                    return ApiHelper.getUserId(context);
                 }
 
                 @Override
                 public String getName() {
-                    return ApiHelper.getApiName();
+                    return ApiHelper.getApiName(getApplicationContext());
                 }
 
                 @Override
                 public String getEmail() {
-                    return ApiHelper.getApiEmail();
+                    return ApiHelper.getApiEmail(getApplicationContext());
                 }
 
                 @Override
                 public void invalidate() {
                     Log.d("TES-LOGOUT", "invalidate");
-                    ApiHelper.simpleInvalidate();
+                    ApiHelper.invalidate(getApplicationContext());
                     if (authenticationListener != null) {
                         authenticationListener.onUserLoggedOut();
                     }
@@ -95,12 +101,35 @@ public class App extends Application {
         return apiService;
     }
 
+    public ApiService getLoginService() {
+        if (loginService == null) {
+            loginService = provideLoginRetrofit(ApiHelper.getBaseUrl()).create(ApiService.class);
+        }
+        return loginService;
+    }
+
+    private Retrofit provideLoginRetrofit(String url) {
+        return new Retrofit.Builder()
+                .baseUrl(url)
+                .client(provideLoginOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .build();
+    }
+
     private Retrofit provideRetrofit(String url) {
         return new Retrofit.Builder()
                 .baseUrl(url)
                 .client(provideOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
+    }
+
+    private OkHttpClient provideLoginOkHttpClient() {
+        OkHttpClient.Builder okhttpClientBuilder = new OkHttpClient.Builder();
+        okhttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        return okhttpClientBuilder.build();
     }
 
     private OkHttpClient provideOkHttpClient() {

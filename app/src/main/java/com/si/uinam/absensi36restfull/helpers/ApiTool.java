@@ -11,4 +11,11 @@ public class ApiTool {
         String tgl = df.format(new Date());
         return tgl;
     }
+
+    public static void runLogin() {
+        String pattern = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(pattern);
+        String tgl = df.format(new Date());
+    }
+
 }

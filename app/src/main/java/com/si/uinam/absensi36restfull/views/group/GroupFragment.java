@@ -72,7 +72,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
         String tgl = ApiTool.getTodayDateString();
         //((App)getActivity().getApplication()).setAuthenticationListener(this);
         //((App)context).setAuthenticationListener(this);
-        groupViewModel.loadGroupList(this, tgl);
+        groupViewModel.loadGroupList(getActivity(),this, tgl);
         //groupViewModel.loadGroupList(tgl);
         //groupViewModel.loadGroupList(new Date());
         Log.d("TES-DATE", tgl);
@@ -127,6 +127,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
         //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
         startActivity(loginIntent);
     }

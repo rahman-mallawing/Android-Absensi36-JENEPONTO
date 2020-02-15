@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString();
 
         final App app;
-        app = App.getAppInstance(null);
-        Call<UserModel> call = app.getApiService().getUser(username, password);
+        app = App.getAppInstance(this,null);
+        Call<UserModel> call = app.getLoginService().getUser(username, password);
         call.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess(App app, UserModel user) {
         app.getSession().saveUser(this, user);
+        Log.d("LOG-USER","SAVE USER: LOGIN ACTIVITY");
         btnLogin.setEnabled(true);
         finish();
     }
