@@ -15,6 +15,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -138,6 +139,10 @@ public class App extends Application {
         okhttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.addInterceptor(new AuthorizationInterceptor(getSession()));
+
+        //HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        //loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
+        //okhttpClientBuilder.addInterceptor(loggingInterceptor);
 
         okhttpClientBuilder.addInterceptor(new Interceptor() {
             @Override

@@ -65,8 +65,14 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
         TextView tvMonthYear;
         TextView tvGroup;
         TextView tvHadir;
-        TextView tvDetails;
         TextView mIcon;
+
+        TextView tvAbsen;
+        TextView tvTerlambat;
+        TextView tvDinas;
+        TextView tvCuti;
+        TextView tvIzin;
+        TextView tvSakit;
 
         public GroupViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,7 +82,14 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             tvMonthYear = itemView.findViewById(R.id.tv_month_year);
             tvPersenHadir = itemView.findViewById(R.id.tv_persen_hadir);
             tvHadir = itemView.findViewById(R.id.tv_hadir);
-            tvDetails = itemView.findViewById(R.id.tv_details);
+            //tvDetails = itemView.findViewById(R.id.tv_details);
+
+            tvAbsen = itemView.findViewById(R.id.tv_absen);
+            tvTerlambat = itemView.findViewById(R.id.tv_terlambat);
+            tvDinas = itemView.findViewById(R.id.tv_dinas);
+            tvCuti = itemView.findViewById(R.id.tv_cuti);
+            tvIzin = itemView.findViewById(R.id.tv_izin);
+            tvSakit = itemView.findViewById(R.id.tv_sakit);
 
         }
 
@@ -120,7 +133,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GRAY);
             }
             String details = "Terlambat: "+ groupModel.getJumlahTerlambat() +", Dinas Luar: "+ groupModel.getDinasLuar() +", Cuti: "+ groupModel.getCuti() +", Izin: "+ groupModel.getIzin();
-            tvDetails.setText(details);
+            //tvDetails.setText(details);
             mIcon.setText(String.valueOf(hrf).toUpperCase());
             Random mRandom = new Random();
             final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
@@ -131,6 +144,22 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
                     itemClickCallback.onItemClicked(groupList.get(getAdapterPosition()));
                 }
             });
+
+            tvAbsen.setText(String.valueOf(groupModel.getAbsen()));
+            tvTerlambat.setText(String.valueOf(groupModel.getJumlahTerlambat()));
+            tvDinas.setText(String.valueOf(groupModel.getDinasLuar()));
+            tvCuti.setText(String.valueOf(groupModel.getCuti()));
+            tvIzin.setText(String.valueOf(groupModel.getIzin()));
+            tvSakit.setText(String.valueOf(groupModel.getLainLain()));
+
+            ((GradientDrawable) tvAbsen.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvTerlambat.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvDinas.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvCuti.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvIzin.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvSakit.getBackground()).setColor(Color.LTGRAY);
+
+
         }
     }
 

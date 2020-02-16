@@ -1,10 +1,24 @@
 package com.si.uinam.absensi36restfull.helpers;
 
+import android.graphics.Color;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ApiTool {
+
+    public static int RED_DARK = Color.rgb(255, 87, 51);
+    public static int RED_LIGHTCORAL = Color.rgb(240, 128, 128);
+    public static int RED_INDIANRED = Color.rgb(205, 92, 92);
+    public static int MAROON = Color.rgb(128, 0, 0);
+    public static int OLIVE = Color.rgb(128, 128, 0);
+    public static int GREEN_SMOOTH = Color.rgb(137, 197, 107);
+    public static int BLUE_SMOOTH = Color.rgb(47, 161, 237);
+    public static int YELLOW = Color.rgb(255, 211, 5);
+    public static int YELLOW_CUTI = Color.rgb(255, 104, 1);
+    public static int BROWN = Color.rgb(176, 100, 51);
+
     public static String getTodayDateString() {
         String pattern = "yyyy-MM-dd";
         DateFormat df = new SimpleDateFormat(pattern);
@@ -16,6 +30,30 @@ public class ApiTool {
         String pattern = "yyyy-MM-dd";
         DateFormat df = new SimpleDateFormat(pattern);
         String tgl = df.format(new Date());
+    }
+
+    public static int getTakColor() {
+        return RED_INDIANRED;
+    }
+
+    public static int getHadirColor() {
+        return GREEN_SMOOTH;
+    }
+
+    public static int getDinasColor() {
+        return BLUE_SMOOTH;
+    }
+
+    public static int getCutiColor() {
+        return YELLOW_CUTI;
+    }
+
+    public static int getIzinColor() {
+        return OLIVE;
+    }
+
+    public static int getSakitColor() {
+        return BROWN;
     }
 
 }

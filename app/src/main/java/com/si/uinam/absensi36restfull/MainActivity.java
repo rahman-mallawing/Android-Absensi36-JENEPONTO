@@ -1,10 +1,14 @@
 package com.si.uinam.absensi36restfull;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 
 import java.util.Objects;
 
@@ -37,6 +41,32 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.profile_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()){
+            case R.id.notification :
+                Toast.makeText(this,"Notification",Toast.LENGTH_SHORT).show();
+                Intent identityIntent = new Intent(this, IdentityActivity.class);
+                //identityIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(identityIntent);
+                break;
+            case R.id.help :
+                Toast.makeText(this,"Help",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.setting :
+                Toast.makeText(this,"Setting", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.logout :
+                Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

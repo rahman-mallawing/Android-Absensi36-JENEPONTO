@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_tgl"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_drawable"
+        android:gravity="center"
+        android:text="A"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_hari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/tv_tgl"
+        android:layout_toRightOf="@+id/tv_tgl"
+        android:text="Nama Hari"
+        android:textSize="16sp"
+        android:maxLength="20"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_masuk_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_hari"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tv_tgl"
+        android:layout_toRightOf="@+id/tv_tgl"
+        android:text="Masuk: "
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tv_masuk"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hari"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_toRightOf="@id/tv_masuk_lbl"
+        android:padding="5dp"
+        android:text="10.78%"
+        android:gravity="center"
+        android:background="@drawable/square_drawable"
+        android:textColor="@android:color/white"
+        tools:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tv_pulang_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hari"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/tv_pulang"
+        android:text="Pulang: "
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/tv_pulang"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hari"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:text="10.78%"
+        android:gravity="center"
+        android:background="@drawable/square_drawable"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tv_ket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_masuk"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/tv_tgl"
+        android:layout_toRightOf="@+id/tv_tgl"
+        android:textSize="10dp"
+        android:text="Keterangan: " />
+
+
+
+</RelativeLayout>
