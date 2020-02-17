@@ -39,6 +39,28 @@ public class IdentityViewModel extends ViewModel {
                 .execute();
     }
 
+    public void loadHarianAbsenList(Context context, AuthenticationListener authenticationListener, int stsKehadiran, String tgl){
+        IdentityService.create(context, authenticationListener)
+                .setCallback(new ServiceCallbackInterface<HarianGroupModel, Object>() {
+                    @Override
+                    public void onPostExecute(ArrayList arrayList) {
+                        harianGrupList.setValue(arrayList);
+                    }
+
+                    @Override
+                    public void onPostExecute(Object tObject) {
+
+                    }
+
+                    @Override
+                    public void onFailure(String err) {
+                        errorMessage.setValue(err);
+                    }
+                })
+                .setDateParamAbsenIdentity(stsKehadiran, tgl)
+                .execute();
+    }
+
     public LiveData<ArrayList<HarianGroupModel>> getHarianGrupList() {
         return harianGrupList;
     }

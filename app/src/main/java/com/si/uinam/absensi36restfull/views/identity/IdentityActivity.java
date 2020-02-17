@@ -3,6 +3,7 @@ package com.si.uinam.absensi36restfull.views.identity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
     private ProgressBar progressBar;
     private IdentityListAdapter identityListAdapter;
     private RecyclerView rcvIdentity;
+    private NestedScrollView nvData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +47,22 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
         setContentView(R.layout.activity_identity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setTitle("Squirrel");
 
+        nvData = findViewById(R.id.nv_data);
         progressBar = findViewById(R.id.identityProgressBar);
         rcvIdentity = findViewById(R.id.rcv_identity);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
 
         IdentityGroup identityGroup = getIntent().getParcelableExtra(IdentityActivity.EXTRA_IDENTITY);
+
+        getSupportActionBar().setTitle("Pegawai " + identityGroup.getInfo());
 
         Log.d("identityGroup", identityGroup.getInfo()+" : "+ identityGroup.getGroup_id());
         rcvIdentity.setLayoutManager(new LinearLayoutManager(this));
@@ -98,8 +104,19 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
         });
 
         String tgl = ApiTool.getTodayDateString();
-        identityViewModel.loadHarianGrupList(this, this, identityGroup.getGroup_id(), tgl);
+        if(identityGroup.getGROUP_TYPE()==IdentityGroup.TYPE.GROUP_IDENTITY){
+            identityViewModel.loadHarianGrupList(this, this, identityGroup.getGroup_id(), tgl);
+        }else if(identityGroup.getGROUP_TYPE()==IdentityGroup.TYPE.PRESENCE_IDENTITY){
+            identityViewModel.loadHarianAbsenList(this, this, identityGroup.getSts_kehadiran(), tgl);
+        }
 
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     private void showLoading(Boolean state) {
@@ -110,9 +127,11 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
             rcvIdentity.setVisibility(View.GONE);
+            nvData.setVisibility(View.GONE);
         } else {
             progressBar.setVisibility(View.GONE);
             rcvIdentity.setVisibility(View.VISIBLE);
+            nvData.setVisibility(View.VISIBLE);
         }
     }
 

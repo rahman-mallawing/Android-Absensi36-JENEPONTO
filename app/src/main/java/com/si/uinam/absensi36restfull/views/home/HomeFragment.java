@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -60,13 +61,16 @@ import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
+import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
+import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements AuthenticationListener {
+public class HomeFragment extends Fragment implements AuthenticationListener, View.OnClickListener {
 
+    private static final int REQUEST_CODE = 100;
     private HomeViewModel homeViewModel;
     private ProgressBar homeProgressBar;
     private ScrollView svContainer;
@@ -74,6 +78,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
     private PieChart chartPie;
     private LineChart chartLine;
     private BarChart chart;
+    private CircleImageView cvTakBtn, cvHadirBtn, cvDinasBtn, cvCutiBtn, cvIzinBtn, cvSakitBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -193,6 +198,24 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         tvTerlambat = root.findViewById(R.id.tv_terlambat);
         tvCp = root.findViewById(R.id.tv_cp);
         tvGroup = root.findViewById(R.id.tv_group);
+
+        cvTakBtn = root.findViewById(R.id.cv_mnu_tak);
+        cvTakBtn.setOnClickListener(this);
+        cvHadirBtn = root.findViewById(R.id.cv_mnu_hadir);
+        cvHadirBtn.setOnClickListener(this);
+
+        cvDinasBtn = root.findViewById(R.id.cv_mnu_dinas);
+        cvDinasBtn.setOnClickListener(this);
+
+        cvCutiBtn = root.findViewById(R.id.cv_mnu_cuti);
+        cvCutiBtn.setOnClickListener(this);
+
+        cvIzinBtn = root.findViewById(R.id.cv_mnu_izin);
+        cvIzinBtn.setOnClickListener(this);
+
+        cvSakitBtn = root.findViewById(R.id.cv_mnu_sakit);
+        cvSakitBtn.setOnClickListener(this);
+
 
         homeProgressBar = root.findViewById(R.id.homeProgressBar);
         chart = root.findViewById(R.id.bar_chart);
@@ -466,6 +489,58 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(loginIntent);
+        //startActivity(loginIntent);
+        startActivityForResult(loginIntent, REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("TES-SUKSES", "login sukses");
+        if(requestCode == HomeFragment.REQUEST_CODE){
+            Log.d("TES-SUKSES", "request code passs");
+            if(resultCode == 200){
+                Log.d("TES-SUKSES", "");
+                String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
+                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
+                this.homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString());
+            }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.cv_mnu_tak:
+                loadIdentity(0, "TAK");
+                break;
+            case R.id.cv_mnu_hadir:
+                loadIdentity(1, "HADIR");
+                break;
+            case R.id.cv_mnu_dinas:
+                loadIdentity(2, "DINAS LUAR");
+                break;
+            case R.id.cv_mnu_cuti:
+                loadIdentity(3, "CUTI");
+                break;
+            case R.id.cv_mnu_izin:
+                loadIdentity(4, "IZIN");
+                break;
+            case R.id.cv_mnu_sakit:
+                loadIdentity(5, "SAKIT");
+                break;
+
+        }
+    }
+
+    private void loadIdentity(int stsKehadiran, String info){
+        IdentityGroup identityGroup = new IdentityGroup();
+        identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
+        identityGroup.setSts_kehadiran(stsKehadiran);
+        identityGroup.setInfo(info);
+        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();
+        Intent identityIntent = new Intent(getActivity(), IdentityActivity.class);
+        identityIntent.putExtra(IdentityActivity.EXTRA_IDENTITY, identityGroup);
+        startActivity(identityIntent);
     }
 }

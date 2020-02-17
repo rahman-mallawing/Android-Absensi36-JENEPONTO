@@ -11,13 +11,11 @@
         android:title="Profile"
         android:icon = "@drawable/account_circle_outline"
         app:showAsAction="always" />
-    <item android:id="@+id/notification"
-        android:title="Identitas"/>
-    <item android:id="@+id/help"
-        android:title="Bantuan"/>
-    <item android:id="@+id/setting"
-        android:title="Judul"/>
-    <item android:id="@+id/logout"
+    <item android:id="@+id/mnu_set_tgl"
+        android:title="Set Tanggal"/>
+    <item android:id="@+id/mnu_set_realtime"
+        android:title="Set Realtime"/>
+    <item android:id="@+id/mnu_logout"
         android:title="Logout"/>
 
 </menu>

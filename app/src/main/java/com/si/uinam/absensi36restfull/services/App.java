@@ -50,7 +50,7 @@ public class App extends Application {
             session = new Session() {
                 @Override
                 public boolean isLoggedIn() {
-                    return ApiHelper.isLogged(getApplicationContext());
+                    return ApiHelper.isLogged(context);
                 }
 
                 @Override
@@ -70,18 +70,18 @@ public class App extends Application {
 
                 @Override
                 public String getName() {
-                    return ApiHelper.getApiName(getApplicationContext());
+                    return ApiHelper.getApiName(context);
                 }
 
                 @Override
                 public String getEmail() {
-                    return ApiHelper.getApiEmail(getApplicationContext());
+                    return ApiHelper.getApiEmail(context);
                 }
 
                 @Override
                 public void invalidate() {
                     Log.d("TES-LOGOUT", "invalidate");
-                    ApiHelper.invalidate(getApplicationContext());
+                    ApiHelper.invalidate(context);
                     if (authenticationListener != null) {
                         authenticationListener.onUserLoggedOut();
                     }

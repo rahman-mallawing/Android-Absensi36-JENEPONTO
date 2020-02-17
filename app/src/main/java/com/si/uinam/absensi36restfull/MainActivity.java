@@ -2,12 +2,14 @@ package com.si.uinam.absensi36restfull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.search.SearchActivity;
 
@@ -71,20 +73,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 break;
-            case R.id.notification :
-                Toast.makeText(this,"Notification",Toast.LENGTH_SHORT).show();
-                Intent identityIntent = new Intent(this, IdentityActivity.class);
-                //identityIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(identityIntent);
+            case R.id.mnu_set_tgl :
+
                 break;
-            case R.id.help :
+            case R.id.mnu_set_realtime :
                 Toast.makeText(this,"Help",Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.setting :
-                Toast.makeText(this,"Setting", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.logout :
+            case R.id.mnu_logout :
                 Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
+                Log.d("TES-LOGOUT", "onUserLoggedOut");
+                App.getAppInstance(this,null)
+                        .getSession().invalidate();
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
+                startActivity(loginIntent);
                 break;
             default:
                 break;

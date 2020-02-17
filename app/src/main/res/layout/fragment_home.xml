@@ -87,7 +87,6 @@
                         android:padding="5dp"
                         android:text="470"
                         android:textColor="@color/colorPegawai"
-                        android:textSize="18dp"
                         android:textStyle="bold" />
 
 
@@ -112,7 +111,6 @@
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@color/design_default_color_primary_dark"
@@ -139,7 +137,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -167,7 +164,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -195,7 +191,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -223,7 +218,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -251,7 +245,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -278,7 +271,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -304,7 +296,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -331,7 +322,6 @@
                         android:layout_marginRight="5dp"
                         android:padding="5dp"
                         android:gravity="center"
-                        android:textSize="18dp"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
@@ -378,7 +368,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_cat"
+                            android:id="@+id/cv_mnu_tak"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -405,7 +395,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster"
+                            android:id="@+id/cv_mnu_dinas"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -432,7 +422,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_cast"
+                            android:id="@+id/cv_mnu_cuti"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -458,7 +448,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_xcat"
+                            android:id="@+id/cv_mnu_hadir"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -492,7 +482,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_cfat"
+                            android:id="@+id/cv_mnu_izin"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -518,7 +508,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_chat"
+                            android:id="@+id/cv_mnu_sakit"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -544,7 +534,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_ckat"
+                            android:id="@+id/cv_mnu_terlambat"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
@@ -570,7 +560,7 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/img_poster_lcat"
+                            android:id="@+id/cv_mnu_checklog"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"

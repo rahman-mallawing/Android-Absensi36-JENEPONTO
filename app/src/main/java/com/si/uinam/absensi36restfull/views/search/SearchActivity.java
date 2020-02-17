@@ -18,10 +18,12 @@ import android.widget.Toast;
 
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.IdentityModel;
 import com.si.uinam.absensi36restfull.models.PaginationModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.search.SearchViewModel;
+import com.si.uinam.absensi36restfull.views.monthpresence.MonthPresenceActivity;
 
 public class SearchActivity extends AppCompatActivity implements AuthenticationListener {
 
@@ -48,6 +50,14 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
             @Override
             public void onItemClicked(IdentityModel identityModel) {
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) + identityModel.getName(), Toast.LENGTH_SHORT).show();
+                HarianGroupModel harianGroupModel = new HarianGroupModel();
+                harianGroupModel.setNap(identityModel.getNap());
+                harianGroupModel.setNama(identityModel.getName());
+                harianGroupModel.setFoto(identityModel.getFoto());
+                harianGroupModel.setGroupId(identityModel.getGrupId());
+                Intent presenceIntent = new Intent(SearchActivity.this, MonthPresenceActivity.class);
+                presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
+                startActivity(presenceIntent);
             }
         });
         searchListAdapter.notifyDataSetChanged();

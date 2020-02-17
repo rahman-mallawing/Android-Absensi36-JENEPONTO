@@ -6,6 +6,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.si.uinam.absensi36restfull.services.App;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final int RESULT_CODE = 200;
+    public static final String EXTRA_NAME = "EXTRA-NAME";
     private EditText edtUsername;
     private EditText edtPassword;
     private Button btnLogin;
@@ -128,6 +131,9 @@ public class LoginActivity extends AppCompatActivity {
         app.getSession().saveUser(this, user);
         Log.d("LOG-USER","SAVE USER: LOGIN ACTIVITY");
         btnLogin.setEnabled(true);
+        Intent intentResult = new Intent();
+        intentResult.putExtra(LoginActivity.EXTRA_NAME, user.getNamaOperator());
+        setResult(LoginActivity.RESULT_CODE, intentResult);
         finish();
     }
 

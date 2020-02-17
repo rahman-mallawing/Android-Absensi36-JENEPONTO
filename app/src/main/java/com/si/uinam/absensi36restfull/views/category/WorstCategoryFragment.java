@@ -26,8 +26,10 @@ import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
+import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.CategoryViewModel;
+import com.si.uinam.absensi36restfull.views.monthpresence.MonthPresenceActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +40,7 @@ import java.util.Date;
 public class WorstCategoryFragment extends Fragment implements AuthenticationListener {
 
 
+    private static final int REQUEST_CODE = 100;
     private CategoryViewModel categoryViewModel;
     private ProgressBar progressBar;
     private WorstCategoryListAdapter worstCategoryListAdapter;
@@ -104,7 +107,14 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
         worstCategoryListAdapter.setItemClickCallback(new WorstCategoryListAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(CategoryModel categoryModel) {
+                HarianGroupModel harianGroupModel = new HarianGroupModel();
+                harianGroupModel.setNap(categoryModel.getNap());
+                harianGroupModel.setNama(categoryModel.getNama());
+                harianGroupModel.setFoto(categoryModel.getFoto());
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + categoryModel.getNama(), Toast.LENGTH_SHORT).show();
+                Intent presenceIntent = new Intent(getActivity(), MonthPresenceActivity.class);
+                presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
+                startActivity(presenceIntent);
             }
         });
 
@@ -133,12 +143,28 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
 
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("TES-SUKSES", "login sukses");
+        if(requestCode == WorstCategoryFragment.REQUEST_CODE){
+            Log.d("TES-SUKSES", "request code passs");
+            if(resultCode == 200){
+                Log.d("TES-SUKSES", "");
+                String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
+                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
+                String tgl = ApiTool.getTodayDateString();
+                categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
+            }
+        }
+    }
+
+    @Override
     public void onUserLoggedOut() {
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-        //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
-        startActivity(loginIntent);
+        //startActivity(loginIntent);
+        startActivityForResult(loginIntent, REQUEST_CODE);
     }
 }

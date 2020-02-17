@@ -45,6 +45,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
@@ -57,6 +58,9 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         progressBar.setIndeterminate(true);
 
         HarianGroupModel harianGroupExtra = getIntent().getParcelableExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL);
+
+        getSupportActionBar().setTitle("Kehadiran " + harianGroupExtra.getNama());
+
         rcvPresence.setLayoutManager(new LinearLayoutManager(this));
         monthPresenceListAdapter = new MonthPresenceListAdapter();
         monthPresenceListAdapter.setItemClickCallback(new MonthPresenceListAdapter.OnItemClickCallback() {
@@ -96,6 +100,12 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         naps[0] = Integer.valueOf(harianGroupExtra.getNap());
         monthPresenceViewModel.loadMonthPresenceList(this, this, tgl, naps);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     private void showLoading(Boolean state) {

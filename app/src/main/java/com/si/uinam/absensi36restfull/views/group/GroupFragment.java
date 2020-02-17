@@ -39,6 +39,7 @@ import java.util.Date;
 
 public class GroupFragment extends Fragment implements AuthenticationListener {
 
+    private static final int REQUEST_CODE = 100;
     private GroupViewModel groupViewModel;
     private ProgressBar progressBar;
     private GroupListAdapter groupListAdapter;
@@ -132,12 +133,30 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("TES-SUKSES", "login sukses");
+        if(requestCode == GroupFragment.REQUEST_CODE){
+            Log.d("TES-SUKSES", "request code passs");
+            if(resultCode == 200){
+                Log.d("TES-SUKSES", "");
+                String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
+                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
+                String tgl = ApiTool.getTodayDateString();
+                //((App)getActivity().getApplication()).setAuthenticationListener(this);
+                //((App)context).setAuthenticationListener(this);
+                groupViewModel.loadGroupList(getActivity(),this, tgl);
+            }
+        }
+    }
+
+    @Override
     public void onUserLoggedOut() {
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-        //detailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE, movie);
-        startActivity(loginIntent);
+        //startActivity(loginIntent);
+        startActivityForResult(loginIntent, REQUEST_CODE);
     }
 }

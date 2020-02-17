@@ -59,6 +59,70 @@ public class HarianGroupModel implements Parcelable {
     @SerializedName("foto")
     protected String foto;
 
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public void setGrup(String grup) {
+        this.grup = grup;
+    }
+
+    public void setNap(String nap) {
+        this.nap = nap;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public void setTgl(Date tgl) {
+        this.tgl = tgl;
+    }
+
+    public void setJamMasuk(String jamMasuk) {
+        this.jamMasuk = jamMasuk;
+    }
+
+    public void setJamPulang(String jamPulang) {
+        this.jamPulang = jamPulang;
+    }
+
+    public void setDay_off(int day_off) {
+        this.day_off = day_off;
+    }
+
+    public void setHadir(int hadir) {
+        this.hadir = hadir;
+    }
+
+    public void setAbsen(int absen) {
+        this.absen = absen;
+    }
+
+    public void setDinasLuar(int dinasLuar) {
+        this.dinasLuar = dinasLuar;
+    }
+
+    public void setCuti(int cuti) {
+        this.cuti = cuti;
+    }
+
+    public void setIzin(int izin) {
+        this.izin = izin;
+    }
+
+    public void setSakit(int sakit) {
+        this.sakit = sakit;
+    }
+
+    public void setLainLain(int lainLain) {
+        this.lainLain = lainLain;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public int getGroupId() {
         return groupId;
     }
