@@ -83,7 +83,7 @@ public class BestCategoryFragment extends Fragment implements AuthenticationList
                 showLoading(false);
             }
         });
-        String tgl = ApiTool.getTodayDateString();
+        String tgl = ApiTool.getTodayDateString(getActivity());
         categoryViewModel.loadBestCategoryList(getActivity(),this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
@@ -154,7 +154,7 @@ public class BestCategoryFragment extends Fragment implements AuthenticationList
                 Log.d("TES-SUKSES", "");
                 String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
-                categoryViewModel.loadBestCategoryList(getActivity(),this, ApiTool.getTodayDateString());
+                categoryViewModel.loadBestCategoryList(getActivity(),this, ApiTool.getTodayDateString(getActivity()));
             }
         }
     }

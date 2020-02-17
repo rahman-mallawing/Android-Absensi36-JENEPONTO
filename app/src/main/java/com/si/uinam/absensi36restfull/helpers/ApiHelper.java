@@ -7,6 +7,12 @@ import android.util.Log;
 
 import com.si.uinam.absensi36restfull.models.UserModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class ApiHelper {
 
     private static final String BASE_URL = "https://rest.api3.annahdahcloudserver.com";
@@ -25,7 +31,40 @@ public class ApiHelper {
         return IMG_BASE_URL;
     }
 
+    public static void saveTanggal(Context context, int year, int month, int day){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        String pattern = "yyyy-MM-dd";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date tgl = new GregorianCalendar(year, month - 1, day).getTime();
+        String savedTgl = df.format(tgl);
 
+        editor.putBoolean("DATE_SET", true);
+        editor.putString("TANGGAL",savedTgl);
+        editor.apply();
+    }
+
+    public static void resetTanggal(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("DATE_SET");
+        editor.remove("TANGGAL");
+        editor.apply();
+    }
+
+    public static String getTanggal(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String tgl = preferences.getString("TANGGAL", "");
+        //Log.d("LOG-USER","CEK LOGIN:"+isLoggedActive);
+        return tgl;
+    }
+
+    public static boolean isTanggal(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isLogged = preferences.getBoolean("DATE_SET", false);
+        //Log.d("LOG-USER","CEK LOGIN:"+isLoggedActive);
+        return isLogged;
+    }
 
     public static void saveUser(Context context, UserModel user){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);

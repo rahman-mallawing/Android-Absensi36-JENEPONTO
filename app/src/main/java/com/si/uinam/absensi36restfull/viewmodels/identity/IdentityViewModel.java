@@ -58,7 +58,7 @@ public class IdentityViewModel extends ViewModel {
                     }
                 })
                 .setDateParamAbsenIdentity(stsKehadiran, tgl)
-                .execute();
+                .executeAbsenIdentity();
     }
 
     public LiveData<ArrayList<HarianGroupModel>> getHarianGrupList() {

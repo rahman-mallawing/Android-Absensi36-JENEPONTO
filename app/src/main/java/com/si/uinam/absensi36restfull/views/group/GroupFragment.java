@@ -72,7 +72,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
                 showLoading(false);
             }
         });
-        String tgl = ApiTool.getTodayDateString();
+        String tgl = ApiTool.getTodayDateString(getActivity());
         //((App)getActivity().getApplication()).setAuthenticationListener(this);
         //((App)context).setAuthenticationListener(this);
         groupViewModel.loadGroupList(getActivity(),this, tgl);
@@ -142,7 +142,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
                 Log.d("TES-SUKSES", "");
                 String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
-                String tgl = ApiTool.getTodayDateString();
+                String tgl = ApiTool.getTodayDateString(getActivity());
                 //((App)getActivity().getApplication()).setAuthenticationListener(this);
                 //((App)context).setAuthenticationListener(this);
                 groupViewModel.loadGroupList(getActivity(),this, tgl);

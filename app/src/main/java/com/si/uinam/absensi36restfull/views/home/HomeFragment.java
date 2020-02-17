@@ -3,6 +3,7 @@ package com.si.uinam.absensi36restfull.views.home;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -124,7 +125,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         if(!ApiHelper.isLogged(getActivity())){
             onUserLoggedOut();
         }else {
-            homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString());
+            homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString(getActivity()));
         }
 
         //chartLine = findViewById(R.id.chart);
@@ -294,7 +295,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
             chartLine.getData().notifyDataChanged();
             chartLine.notifyDataSetChanged();
         } else {
-            set1 = new LineDataSet(values, "Sample Data");
+            set1 = new LineDataSet(values, "Jumlah hadir per hari");
             set1.setDrawIcons(false);
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
@@ -320,6 +321,13 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
             LineData data = new LineData(dataSets);
+
+            Description dc = chartLine.getDescription();
+            dc.setText("Kehadiran harian per bulan");
+            dc.setTextAlign(Paint.Align.CENTER);
+            int width = chartLine.getWidth(); int height = chartLine.getHeight();
+            dc.setPosition(width/2,height-100);
+            //chartLine.setDescription(dc);
             chartLine.setData(data);
             chartLine.invalidate();
         }
@@ -429,7 +437,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
 
         chartLine.setTouchEnabled(false);
         chartLine.setPinchZoom(true);
-        chart.setScaleEnabled(false);
+        chartLine.setScaleEnabled(false);
 
         MyMarkerView mv = new MyMarkerView(getActivity().getApplicationContext(), R.layout.custom_marker_view);
         mv.setChartView(chartLine);
@@ -465,6 +473,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         dataPie.addDataSet(setPie);
         dataPie.setValueTextColor(Color.WHITE);
         dataPie.setValueFormatter(new PercentFormatter());
+        chartPie.setDescription(null);
         chartPie.setData(dataPie);
         chartPie.invalidate();
     }
@@ -503,7 +512,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
                 Log.d("TES-SUKSES", "");
                 String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
-                this.homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString());
+                this.homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString(getActivity()));
             }
         }
     }
@@ -534,6 +543,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     }
 
     private void loadIdentity(int stsKehadiran, String info){
+        Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
         IdentityGroup identityGroup = new IdentityGroup();
         identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
         identityGroup.setSts_kehadiran(stsKehadiran);

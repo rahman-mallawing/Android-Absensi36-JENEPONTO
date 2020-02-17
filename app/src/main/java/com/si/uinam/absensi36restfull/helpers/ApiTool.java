@@ -1,6 +1,12 @@
 package com.si.uinam.absensi36restfull.helpers;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,7 +25,19 @@ public class ApiTool {
     public static int YELLOW_CUTI = Color.rgb(255, 104, 1);
     public static int BROWN = Color.rgb(176, 100, 51);
 
-    public static String getTodayDateString() {
+    public static String getTodayDateString(Context context) {
+        if(ApiHelper.isTanggal(context)){
+            String msg = "Peringatan: Tanggal bukan waktu real";
+            Toast toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+            View vi = toast.getView();
+            vi.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+            TextView text = vi.findViewById(android.R.id.message);
+            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+            text.setTextColor(Color.WHITE);
+            //text.setHeight(100dp);
+            toast.show();
+            return ApiHelper.getTanggal(context);
+        }
         String pattern = "yyyy-MM-dd";
         DateFormat df = new SimpleDateFormat(pattern);
         String tgl = df.format(new Date());

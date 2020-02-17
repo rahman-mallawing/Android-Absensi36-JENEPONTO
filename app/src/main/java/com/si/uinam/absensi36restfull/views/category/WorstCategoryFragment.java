@@ -83,7 +83,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                 showLoading(false);
             }
         });
-        String tgl = ApiTool.getTodayDateString();
+        String tgl = ApiTool.getTodayDateString(getActivity());
         categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
@@ -152,7 +152,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                 Log.d("TES-SUKSES", "");
                 String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
-                String tgl = ApiTool.getTodayDateString();
+                String tgl = ApiTool.getTodayDateString(getActivity());
                 categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
             }
         }

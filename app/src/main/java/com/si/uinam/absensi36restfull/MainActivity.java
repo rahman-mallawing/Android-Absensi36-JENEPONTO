@@ -1,18 +1,22 @@
 package com.si.uinam.absensi36restfull;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.search.SearchActivity;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +27,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+
+
+
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
     }
 
@@ -74,10 +85,26 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.mnu_set_tgl :
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog.OnDateSetListener lst = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        //day + "/" + (month + 1) + "/" + year
+                        ApiHelper.saveTanggal(getApplicationContext(), year, (month + 1), day);
+                        Toast.makeText(getApplicationContext(),day + "/" + (month + 1) + "/" + year,Toast.LENGTH_SHORT).show();
+                    }
+                };
+                datePickerDialog = new DatePickerDialog(this, lst, year, month,dayOfMonth);
+
+                datePickerDialog.show();
 
                 break;
             case R.id.mnu_set_realtime :
                 Toast.makeText(this,"Help",Toast.LENGTH_SHORT).show();
+                ApiHelper.resetTanggal(getApplicationContext());
                 break;
             case R.id.mnu_logout :
                 Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();

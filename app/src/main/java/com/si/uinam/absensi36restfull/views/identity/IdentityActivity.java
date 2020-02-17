@@ -103,10 +103,12 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
             }
         });
 
-        String tgl = ApiTool.getTodayDateString();
+        String tgl = ApiTool.getTodayDateString(this);
         if(identityGroup.getGROUP_TYPE()==IdentityGroup.TYPE.GROUP_IDENTITY){
+            Log.d("TYPE-GROUP", identityGroup.getInfo()+" : "+ identityGroup.getGroup_id());
             identityViewModel.loadHarianGrupList(this, this, identityGroup.getGroup_id(), tgl);
         }else if(identityGroup.getGROUP_TYPE()==IdentityGroup.TYPE.PRESENCE_IDENTITY){
+            Log.d("TYPE-GROUP", identityGroup.getInfo()+" : "+ identityGroup.getSts_kehadiran());
             identityViewModel.loadHarianAbsenList(this, this, identityGroup.getSts_kehadiran(), tgl);
         }
 

@@ -95,7 +95,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
                 }
             }
         });
-        String tgl = ApiTool.getTodayDateString();
+        String tgl = ApiTool.getTodayDateString(this);
         int[] naps = {1000000};
         naps[0] = Integer.valueOf(harianGroupExtra.getNap());
         monthPresenceViewModel.loadMonthPresenceList(this, this, tgl, naps);

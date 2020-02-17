@@ -50,6 +50,7 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull IdentityViewHolder holder, int position) {
+        //holder.tvUrutan.setText(position+1);
         holder.bind(harianGroupList.get(position));
     }
 
@@ -60,22 +61,22 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
 
     public class IdentityViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvPersenHadir;
-        TextView tvMonthYear;
+        TextView tvStsHadir;
+        TextView tvUrutan;
         TextView tvName;
-        TextView tvHadir;
-        TextView tvDetails;
+        TextView tvNi;
         CircleImageView imgIdentity;
+        int urutan = 0;
 
 
         public IdentityViewHolder(@NonNull View itemView) {
             super(itemView);
             imgIdentity = itemView.findViewById(R.id.img_identity);
             tvName = itemView.findViewById(R.id.tv_name);
-            tvMonthYear = itemView.findViewById(R.id.tv_month_year);
-            tvPersenHadir = itemView.findViewById(R.id.tv_persen_hadir);
-            tvHadir = itemView.findViewById(R.id.tv_hadir);
-            tvDetails = itemView.findViewById(R.id.tv_details);
+            tvUrutan = itemView.findViewById(R.id.tv_urutan);
+            tvStsHadir = itemView.findViewById(R.id.tv_sts_hadir);
+            tvNi = itemView.findViewById(R.id.tv_ni);
+            //urutan = urutan +1;
         }
 
         public void bind(HarianGroupModel harianGroupModel) {
@@ -90,32 +91,33 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
                     .apply(requestOptions)
                     .into(imgIdentity);
 
+            //tvUrutan.setText(this.urutan);
             tvName.setText(harianGroupModel.getNama());
             //txvHadir.setText(String.valueOf(groupModel.getHadir()));
 
-            tvDetails.setText(harianGroupModel.getNap());
+            tvNi.setText(harianGroupModel.getNap());
 
             if(harianGroupModel.getHadir() == 1){
-                tvPersenHadir.setTextColor(Color.parseColor("#006400"));
-                tvHadir.setText("Hadir");
+                tvStsHadir.setTextColor(Color.parseColor("#006400"));
+                tvStsHadir.setText("Hadir");
             } else if (harianGroupModel.getDinasLuar() == 1){
-                tvPersenHadir.setTextColor(Color.BLUE);
-                tvHadir.setText("Dinas Luar");
+                tvStsHadir.setTextColor(Color.BLUE);
+                tvStsHadir.setText("Dinas Luar");
             }else if (harianGroupModel.getCuti() == 1){
-                tvPersenHadir.setTextColor(Color.YELLOW);
-                tvHadir.setText("Cuti");
+                tvStsHadir.setTextColor(Color.YELLOW);
+                tvStsHadir.setText("Cuti");
             }else if (harianGroupModel.getIzin() == 1){
-                tvPersenHadir.setTextColor(Color.RED);
-                tvHadir.setText("Izin");
+                tvStsHadir.setTextColor(Color.RED);
+                tvStsHadir.setText("Izin");
             }else if (harianGroupModel.getSakit() == 1){
-                tvPersenHadir.setTextColor(Color.RED);
-                tvHadir.setText("Sakit");
+                tvStsHadir.setTextColor(Color.RED);
+                tvStsHadir.setText("Sakit");
             }else if (harianGroupModel.getAbsen() == 1){
-                tvPersenHadir.setTextColor(Color.RED);
-                tvHadir.setText("TAK");
+                tvStsHadir.setTextColor(Color.RED);
+                tvStsHadir.setText("TAK");
             }else {
-                tvPersenHadir.setTextColor(Color.GRAY);
-                tvHadir.setText("Lain-lain");
+                tvStsHadir.setTextColor(Color.GRAY);
+                tvStsHadir.setText("Lain-lain");
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

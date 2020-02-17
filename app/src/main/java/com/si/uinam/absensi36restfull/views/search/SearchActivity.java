@@ -44,6 +44,8 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
         progressBar.setIndeterminate(true);
 
         String query = getIntent().getStringExtra(SearchActivity.EXTRA_SEARCH);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Cari pegawai: "+query);
         rcvSearch.setLayoutManager(new LinearLayoutManager(this));
         searchListAdapter = new SearchListAdapter();
         searchListAdapter.setItemClickCallback(new SearchListAdapter.OnItemClickCallback() {
@@ -105,6 +107,12 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
             progressBar.setVisibility(View.GONE);
             rcvSearch.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return super.onSupportNavigateUp();
     }
 
     @Override

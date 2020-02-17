@@ -140,9 +140,9 @@ public class App extends Application {
         okhttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
         okhttpClientBuilder.addInterceptor(new AuthorizationInterceptor(getSession()));
 
-        //HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        //loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
-        //okhttpClientBuilder.addInterceptor(loggingInterceptor);
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
+        okhttpClientBuilder.addInterceptor(loggingInterceptor);
 
         okhttpClientBuilder.addInterceptor(new Interceptor() {
             @Override
