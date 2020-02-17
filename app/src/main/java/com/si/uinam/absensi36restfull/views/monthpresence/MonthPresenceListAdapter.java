@@ -96,7 +96,7 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
 
 
             String lbl = String.valueOf(day)+"/"+String.valueOf(month+1);
-            tvTgl.setText("31/12");
+            tvTgl.setText(lbl);
             Random mRandom = new Random();
             final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
             ((GradientDrawable) tvTgl.getBackground()).setColor(color);

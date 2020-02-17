@@ -9,10 +9,12 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
+import com.si.uinam.absensi36restfull.views.search.SearchActivity;
 
 import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.profile_menu, menu);
+        MenuItem mnuSearch = menu.findItem(R.id.mnu_search);
+
         return true;
     }
 
@@ -47,6 +51,26 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()){
+            case R.id.mnu_search :
+                Toast.makeText(this,"Search",Toast.LENGTH_SHORT).show();
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setQueryHint("Cari Pegawai");
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        Toast.makeText(getBaseContext(),query,Toast.LENGTH_SHORT).show();
+                        Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                        searchIntent.putExtra(SearchActivity.EXTRA_SEARCH, query);
+                        startActivity(searchIntent);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
+                break;
             case R.id.notification :
                 Toast.makeText(this,"Notification",Toast.LENGTH_SHORT).show();
                 Intent identityIntent = new Intent(this, IdentityActivity.class);

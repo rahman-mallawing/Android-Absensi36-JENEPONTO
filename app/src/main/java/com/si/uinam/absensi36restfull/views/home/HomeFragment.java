@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
     private HomeViewModel homeViewModel;
     private ProgressBar homeProgressBar;
     private ScrollView svContainer;
-    private TextView tvPegawai, tvHadir, tvDinas, tvTak;
+    private TextView tvPegawai, tvHadir, tvDinas, tvTak, tvCuti, tvIzin, tvSakit, tvTerlambat, tvCp, tvGroup;
     private PieChart chartPie;
     private LineChart chartLine;
     private BarChart chart;
@@ -82,10 +83,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         homeViewModel.getStatistikHarian().observe(this, new Observer<StatistikModel>() {
             @Override
             public void onChanged(StatistikModel statistikModel) {
-                tvPegawai.setText(String.valueOf(statistikModel.getJumlahPegawai()));
-                tvHadir.setText(String.valueOf(statistikModel.getHadir()));
-                tvDinas.setText(String.valueOf(statistikModel.getDinasLuar()));
-                tvTak.setText(String.valueOf(statistikModel.getAbsen()));
+                fillStatistik(statistikModel);
                 fillPieChart(statistikModel);
                 showLoading(false);
             }
@@ -130,6 +128,54 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
 
     }
 
+    private void fillStatistik(StatistikModel statistikModel) {
+        tvPegawai.setText(String.valueOf(statistikModel.getJumlahPegawai()));
+        tvHadir.setText(String.valueOf(statistikModel.getHadir()));
+        if(statistikModel.getHadir()>0){
+            tvHadir.setTextColor(getResources().getColor(R.color.colorHadir));
+        }
+        tvDinas.setText(String.valueOf(statistikModel.getDinasLuar()));
+        if(statistikModel.getDinasLuar()>0){
+            tvDinas.setTextColor(getResources().getColor(R.color.colorDinas));
+        }
+        tvTak.setText(String.valueOf(statistikModel.getAbsen()));
+        if(statistikModel.getAbsen()>0){
+            tvTak.setTextColor(getResources().getColor(R.color.colorTAK));
+        }
+        tvCuti.setText(String.valueOf(statistikModel.getCuti()));
+        if(statistikModel.getCuti()>0){
+            tvCuti.setTextColor(getResources().getColor(R.color.colorCuti));
+        }
+        tvIzin.setText(String.valueOf(statistikModel.getIzin()));
+        if(statistikModel.getIzin()>0){
+            tvIzin.setTextColor(getResources().getColor(R.color.colorIzin));
+        }
+        tvSakit.setText(String.valueOf(statistikModel.getSakit()));
+        if(statistikModel.getSakit()>0){
+            tvSakit.setTextColor(getResources().getColor(R.color.colorSakit));
+        }
+        tvTerlambat.setText(String.valueOf(statistikModel.getJumlahTerlambat()));
+        if(statistikModel.getJumlahTerlambat()>0){
+            tvTerlambat.setTextColor(getResources().getColor(R.color.colorTAK));
+        }
+        tvCp.setText(String.valueOf(statistikModel.getJumlahCp()));
+        if(statistikModel.getJumlahCp()>0){
+            tvCp.setTextColor(getResources().getColor(R.color.colorTAK));
+        }
+        tvGroup.setText(String.valueOf(statistikModel.getJumlahGrup()));
+
+        ((GradientDrawable) tvPegawai.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvHadir.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvTak.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvTerlambat.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvDinas.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvCuti.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvIzin.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvSakit.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvCp.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvGroup.getBackground()).setColor(Color.LTGRAY);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -141,23 +187,19 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         tvHadir = root.findViewById(R.id.tv_hadir);
         tvDinas = root.findViewById(R.id.tv_dinas);
         tvTak = root.findViewById(R.id.tv_tak);
+        tvCuti = root.findViewById(R.id.tv_cuti);
+        tvIzin = root.findViewById(R.id.tv_izin);
+        tvSakit = root.findViewById(R.id.tv_sakit);
+        tvTerlambat = root.findViewById(R.id.tv_terlambat);
+        tvCp = root.findViewById(R.id.tv_cp);
+        tvGroup = root.findViewById(R.id.tv_group);
+
         homeProgressBar = root.findViewById(R.id.homeProgressBar);
         chart = root.findViewById(R.id.bar_chart);
         chartLine = root.findViewById(R.id.chart_line);
         chartPie = root.findViewById(R.id.chart_pie);
 
-        /*
-        chartLine.setTouchEnabled(true);
-        chartLine.setPinchZoom(true);
-        chart.setScaleEnabled(false);
 
-        MyMarkerView mv = new MyMarkerView(getActivity().getApplicationContext(), R.layout.custom_marker_view);
-        mv.setChartView(chartLine);
-        chartLine.setMarker(mv);
-
-        renderData();
-
-         */
         return root;
     }
 
@@ -371,39 +413,6 @@ public class HomeFragment extends Fragment implements AuthenticationListener {
         chartLine.setMarker(mv);
 
         renderData(staHarianBulanModels);
-
-        /* List<Entry> valsComp1 = new ArrayList<Entry>();
-        Entry c1e1;
-
-        /*
-        for (int i = 1; i < 31; i++) {
-            c1e1 = new Entry(i, (float) (Math.random() * 40) ); // 0 == quarter 1
-            valsComp1.add(c1e1);
-        }
-
-
-        for(StaHarianBulanModel item : staHarianBulanModels){
-            c1e1 = new Entry(item.getDayOfMonth(), (float) item.getHadir());
-            valsComp1.add(c1e1);
-        }
-
-
-        LineDataSet setComp1 = new LineDataSet(valsComp1, "Kehadiran Harian");
-        setComp1.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        // use the interface ILineDataSet
-        List<ILineDataSet> dataSets2 = new ArrayList<ILineDataSet>();
-        dataSets2.add(setComp1);
-        LineData dataLine = new LineData(dataSets2);
-        chartLine.setData(dataLine);
-        String bulan = new SimpleDateFormat("MMM").format(staHarianBulanModels.get(0).getTgl());
-        String tahun = new SimpleDateFormat("YYYY").format(staHarianBulanModels.get(0).getTgl());
-        Description desc = new Description();
-        desc.setText("Kehadiran "+bulan+" "+tahun);
-        chartLine.setDescription(desc);
-        chartLine.invalidate(); // refresh
-
-         */
     }
 
     private void fillPieChart(StatistikModel stm){

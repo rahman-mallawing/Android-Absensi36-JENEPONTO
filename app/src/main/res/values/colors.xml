@@ -4,5 +4,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorPegawai">#3F51B5</color>
+    <color name="colorHadir">#4CAF50</color>
+    <color name="colorTAK">#FF5722</color>
+    <color name="colorDinas">#9C27B0</color>
+    <color name="colorCuti">#FF9800</color>
+    <color name="colorIzin">#FFAB40</color>
+    <color name="colorSakit">#FF6E40</color>
 
 </resources>

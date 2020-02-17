@@ -3,7 +3,9 @@ package com.si.uinam.absensi36restfull.services;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.models.GroupModel;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
+import com.si.uinam.absensi36restfull.models.IdentityModel;
 import com.si.uinam.absensi36restfull.models.MonthPresenceModel;
+import com.si.uinam.absensi36restfull.models.PaginationModel;
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
 import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
@@ -61,6 +63,13 @@ public interface ApiService {
     @GET("/api/v3/presensi/kelola/laporan-harian-absen")
     Call<ArrayList<HarianGroupModel>> getLaporanHarianAbsen(
             @Query("tgl") String tgl, @Query("sts_kehadiran") int sts_kehadiran);
+
+    @GET("/api/v3/identitas/search")
+    Call<PaginationModel<IdentityModel>> searchIdentity(
+            @Query("query") String query,
+            @Query("nama") String nama,
+            @Query("nap") String nap,
+            @Query("page") int page);
 
     @Headers("Content-Type: application/json")
     @POST("/api/v3/presensi/kelola/laporan-bulanan-pegawai")

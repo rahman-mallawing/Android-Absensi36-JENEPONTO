@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.monthpresence.MonthPresenceActivity"></activity>
+        <activity android:name=".views.search.SearchActivity"></activity>
+        <activity android:name=".views.monthpresence.MonthPresenceActivity" />
         <activity android:name=".views.identity.IdentityActivity" />
         <activity android:name=".LoginActivity" />
         <activity
