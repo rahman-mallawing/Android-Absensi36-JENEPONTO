@@ -15,6 +15,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,8 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
     private IdentityListAdapter identityListAdapter;
     private RecyclerView rcvIdentity;
     private NestedScrollView nvData;
+    private LinearLayout linearLayout;
+    private Button btnNoResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,15 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
         collapsingToolbar.setTitle("Squirrel");
 
         nvData = findViewById(R.id.nv_data);
+        linearLayout = findViewById(R.id.ll_no_result);
+        btnNoResult = findViewById(R.id.btn_no_result);
+        btnNoResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //onBackPressed();
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
+            }
+        });
         progressBar = findViewById(R.id.identityProgressBar);
         rcvIdentity = findViewById(R.id.rcv_identity);
         progressBar.setVisibility(View.VISIBLE);
@@ -99,6 +112,12 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
                 if(harianGroupModels != null){
                     identityListAdapter.setHarianGroupList(harianGroupModels);
                     showLoading(false);
+                    if(harianGroupModels.size()==0){
+                        linearLayout.setVisibility(View.VISIBLE);
+                    }
+
+                }else{
+
                 }
             }
         });
@@ -122,6 +141,7 @@ public class IdentityActivity extends AppCompatActivity implements Authenticatio
     }
 
     private void showLoading(Boolean state) {
+        linearLayout.setVisibility(View.GONE);
         if(progressBar == null) {
             Log.d("TES-progressBar", "NULL NULL NULL");
             return;

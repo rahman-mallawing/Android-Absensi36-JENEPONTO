@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
+import com.si.uinam.absensi36restfull.views.profile.ProfileFragment;
 import com.si.uinam.absensi36restfull.views.search.SearchActivity;
 
 import java.util.Calendar;
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -64,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()){
+            case R.id.mnu_profile:
+                FragmentManager fm = getSupportFragmentManager();
+                ProfileFragment editNameDialogFragment = ProfileFragment.newInstance("Some Title");
+                editNameDialogFragment.show(fm, "fragment_edit_name");
+
+
+                break;
             case R.id.mnu_search :
                 Toast.makeText(this,"Search",Toast.LENGTH_SHORT).show();
                 SearchView searchView = (SearchView) item.getActionView();
