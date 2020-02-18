@@ -79,16 +79,23 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
         public void bind(MonthPresenceModel monthPresenceModel) {
 
 
+            tvPulang.setText(monthPresenceModel.getJamPulang());
+            tvKet.setText(monthPresenceModel.getKetStsAbsen()+"/"+monthPresenceModel.getKet());
             tvMasuk.setText(monthPresenceModel.getJamMasuk());
-            if(monthPresenceModel.getHadir()==1){
+            if(monthPresenceModel.getDay_off()==1){
+                tvMasuk.setTextColor(ApiTool.BLUE_SMOOTH);
+                tvPulang.setTextColor(ApiTool.BLUE_SMOOTH);
+                tvPulang.setText("LIBUR");
+                tvMasuk.setText("LIBUR");
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.BLUE_SMOOTH);
+            }else if(monthPresenceModel.getHadir()==1){
                 tvMasuk.setTextColor(ApiTool.getHadirColor());
                 tvPulang.setTextColor(ApiTool.getHadirColor());
                 ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getHadirColor());
-            }else{
+            } else{
                 ((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
             }
-            tvPulang.setText(monthPresenceModel.getJamPulang());
-            tvKet.setText(monthPresenceModel.getKetStsAbsen()+"/"+monthPresenceModel.getKet());
+
             Date date = monthPresenceModel.getTgl();
             Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Makassar"));
             cal.setTime(date);
