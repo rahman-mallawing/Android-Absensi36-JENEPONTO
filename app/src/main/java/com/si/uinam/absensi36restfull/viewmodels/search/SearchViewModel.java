@@ -27,7 +27,7 @@ public class SearchViewModel extends ViewModel {
                         errorMessage.setValue(err);
                     }
                 })
-                .setDateParam("1", "a", "2896381", page)
+                .setDateParam("1", query, null, page)
                 .execute();
     }
 
