@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiHelper;
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.MonthPresenceModel;
 
@@ -78,6 +80,13 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
 
 
             tvMasuk.setText(monthPresenceModel.getJamMasuk());
+            if(monthPresenceModel.getHadir()==1){
+                tvMasuk.setTextColor(ApiTool.getHadirColor());
+                tvPulang.setTextColor(ApiTool.getHadirColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getHadirColor());
+            }else{
+                ((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
+            }
             tvPulang.setText(monthPresenceModel.getJamPulang());
             tvKet.setText(monthPresenceModel.getKetStsAbsen()+"/"+monthPresenceModel.getKet());
             Date date = monthPresenceModel.getTgl();
@@ -99,7 +108,7 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
             tvTgl.setText(lbl);
             Random mRandom = new Random();
             final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
-            ((GradientDrawable) tvTgl.getBackground()).setColor(color);
+            //((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

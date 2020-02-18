@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiHelper;
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 
 import java.text.SimpleDateFormat;
@@ -98,24 +99,31 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
             tvNi.setText(harianGroupModel.getNap());
 
             if(harianGroupModel.getHadir() == 1){
-                tvStsHadir.setTextColor(Color.parseColor("#006400"));
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getHadirColor());
+                tvStsHadir.setTextColor(Color.WHITE);
                 tvStsHadir.setText("Hadir");
             } else if (harianGroupModel.getDinasLuar() == 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getDinasColor());
                 tvStsHadir.setTextColor(Color.BLUE);
                 tvStsHadir.setText("Dinas Luar");
             }else if (harianGroupModel.getCuti() == 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getCutiColor());
                 tvStsHadir.setTextColor(Color.YELLOW);
                 tvStsHadir.setText("Cuti");
             }else if (harianGroupModel.getIzin() == 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getIzinColor());
                 tvStsHadir.setTextColor(Color.RED);
                 tvStsHadir.setText("Izin");
             }else if (harianGroupModel.getSakit() == 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getSakitColor());
                 tvStsHadir.setTextColor(Color.RED);
                 tvStsHadir.setText("Sakit");
             }else if (harianGroupModel.getAbsen() == 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getTakColor());
                 tvStsHadir.setTextColor(Color.RED);
                 tvStsHadir.setText("TAK");
             }else {
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(Color.LTGRAY);
                 tvStsHadir.setTextColor(Color.GRAY);
                 tvStsHadir.setText("Lain-lain");
             }

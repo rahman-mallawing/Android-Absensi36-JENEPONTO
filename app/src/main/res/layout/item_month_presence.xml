@@ -56,6 +56,7 @@
         android:padding="5dp"
         android:text="10.78%"
         android:gravity="center"
+        android:textStyle="bold"
         android:background="@drawable/square_drawable"
         android:textColor="@android:color/white"
         tools:layout_marginLeft="10dp" />
@@ -82,6 +83,7 @@
         android:padding="5dp"
         android:text="10.78%"
         android:gravity="center"
+        android:textStyle="bold"
         android:background="@drawable/square_drawable"
         android:textColor="@android:color/white" />
 

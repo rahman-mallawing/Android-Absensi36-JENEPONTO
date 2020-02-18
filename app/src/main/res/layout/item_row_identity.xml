@@ -48,7 +48,7 @@
         android:layout_alignBaseline="@id/tv_name"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="tvEmailTime" />
+        android:text="STATUS" />
 
     <TextView
         android:id="@+id/tv_sts_hadir"

@@ -6,10 +6,10 @@
     tools:context=".views.profile.ProfileFragment">
 
     <!-- fragment_edit_name.xml -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/edit_name"
         android:layout_width="350dp"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:orientation="vertical"  >
 
@@ -44,6 +44,7 @@
             android:id="@+id/btn_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:text="OK" />
     </LinearLayout>
 

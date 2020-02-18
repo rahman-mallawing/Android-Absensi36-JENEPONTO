@@ -107,7 +107,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
                 datePickerDialog = new DatePickerDialog(this, lst, year, month,dayOfMonth);
-
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.MONTH,Calendar.JANUARY);
+                c.set(Calendar.DAY_OF_MONTH,1);
+                datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
                 datePickerDialog.show();
 
                 break;
