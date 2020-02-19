@@ -2,6 +2,9 @@ package com.si.uinam.absensi36restfull.views.monthpresence;
 
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,22 +80,116 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
 
 
         public void bind(MonthPresenceModel monthPresenceModel) {
+            ((GradientDrawable) tvMasuk.getBackground()).setColor(Color.LTGRAY);
+            ((GradientDrawable) tvPulang.getBackground()).setColor(Color.LTGRAY);
+            //tvKet.setText(monthPresenceModel.getKetStsAbsen()+"/"+monthPresenceModel.getKet());
 
-
-            tvPulang.setText(monthPresenceModel.getJamPulang());
-            tvKet.setText(monthPresenceModel.getKetStsAbsen()+"/"+monthPresenceModel.getKet());
-            tvMasuk.setText(monthPresenceModel.getJamMasuk());
-            if(monthPresenceModel.getDay_off()==1){
+            if(monthPresenceModel.getRecordExist()==0){
+                tvPulang.setText("!Record");
+                tvMasuk.setText("!Record");
+                tvKet.setText("Belum ada record absensi");
+                tvKet.setTextColor(ApiTool.getTakColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
+            }else if(monthPresenceModel.getDay_off()==1){
                 tvMasuk.setTextColor(ApiTool.BLUE_SMOOTH);
                 tvPulang.setTextColor(ApiTool.BLUE_SMOOTH);
                 tvPulang.setText("LIBUR");
                 tvMasuk.setText("LIBUR");
+                tvKet.setText("LIBUR");
+                tvKet.setTextColor(Color.BLACK);
                 ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.BLUE_SMOOTH);
             }else if(monthPresenceModel.getHadir()==1){
-                tvMasuk.setTextColor(ApiTool.getHadirColor());
-                tvPulang.setTextColor(ApiTool.getHadirColor());
+                tvKet.setText("HADIR");
+                tvKet.setTextColor(Color.BLACK);
+                if(monthPresenceModel.getJamMasuk()==null){
+                    tvMasuk.setTextColor(ApiTool.getTakColor());
+                    tvMasuk.setText("--:--:--");
+                    tvKet.setText("TERLAMBAT");
+                    tvKet.setTextColor(ApiTool.getTakColor());
+                }else{
+                    tvMasuk.setTextColor(ApiTool.getHadirColor());
+                    tvKet.setTextColor(Color.BLACK);
+                    tvMasuk.setText(monthPresenceModel.getJamMasuk());
+                }
+                if(monthPresenceModel.getJamPulang()==null){
+                    tvPulang.setTextColor(ApiTool.getTakColor());
+                    tvPulang.setText("--:--:--");
+                    tvKet.setText("CEPAT TULANG");
+                    tvKet.setTextColor(ApiTool.getTakColor());
+                }else{
+                    tvPulang.setTextColor(ApiTool.getHadirColor());
+                    tvKet.setTextColor(Color.BLACK);
+                    tvPulang.setText(monthPresenceModel.getJamPulang());
+                }
                 ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getHadirColor());
+            }else if(monthPresenceModel.getDinasLuar()==1){
+
+                if(monthPresenceModel.getJamMasuk()==null){
+                    tvMasuk.setText("DINAS");
+                    tvMasuk.setTextColor(ApiTool.getDinasColor());
+                    tvKet.setText("DINAS");
+                    tvKet.setTextColor(ApiTool.getDinasColor());
+                }else{
+                    tvKet.setTextColor(Color.BLACK);
+                    tvMasuk.setTextColor(ApiTool.getHadirColor());
+                    tvMasuk.setText(monthPresenceModel.getJamMasuk());
+                }
+                if(monthPresenceModel.getJamPulang()==null){
+                    tvPulang.setText("DINAS");
+                    tvPulang.setTextColor(ApiTool.getDinasColor());
+                    tvKet.setText("DINAS");
+                    tvKet.setTextColor(ApiTool.getDinasColor());
+                }else{
+                    tvKet.setTextColor(Color.BLACK);
+                    tvPulang.setTextColor(ApiTool.getHadirColor());
+                    tvPulang.setText(monthPresenceModel.getJamPulang());
+                }
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getDinasColor());
+            }else if(monthPresenceModel.getCuti()==1){
+                tvMasuk.setTextColor(ApiTool.getCutiColor());
+                tvPulang.setTextColor(ApiTool.getCutiColor());
+                tvPulang.setText("CUTI");
+                tvMasuk.setText("CUTI");
+                tvKet.setText("CUTI");
+                tvKet.setTextColor(ApiTool.getCutiColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getCutiColor());
+            }else if(monthPresenceModel.getIzin()==1){
+                tvMasuk.setTextColor(ApiTool.getIzinColor());
+                tvPulang.setTextColor(ApiTool.getIzinColor());
+                tvPulang.setText("IZIN");
+                tvMasuk.setText("IZIN");
+                tvKet.setText("IZIN");
+                tvKet.setTextColor(ApiTool.getIzinColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getIzinColor());
+            }else if(monthPresenceModel.getSakit()==1){
+                tvMasuk.setTextColor(ApiTool.getSakitColor());
+                tvPulang.setTextColor(ApiTool.getSakitColor());
+                tvPulang.setText("SAKIT");
+                tvMasuk.setText("SAKIT");
+                tvKet.setText("SAKIT");
+                tvKet.setTextColor(ApiTool.getSakitColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getSakitColor());
+            }else if(monthPresenceModel.getAbsen()==1){
+                tvMasuk.setTextColor(ApiTool.getTakColor());
+                tvPulang.setTextColor(ApiTool.getTakColor());
+                tvPulang.setText("TAK");
+                tvMasuk.setText("TAK");
+                tvKet.setText("Tanpa Keterangan");
+                tvKet.setTextColor(ApiTool.getTakColor());
+                ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getTakColor());
+            }else if(monthPresenceModel.getLainLain()==1){
+                //tvMasuk.setTextColor(ApiTool.());
+                //tvPulang.setTextColor(ApiTool.getTakColor());
+                tvPulang.setText("LAIN-LAIN");
+                tvMasuk.setText("LAIN-LAIN");
+                tvKet.setText("LAIN-LAIN");
+                tvKet.setTextColor(Color.BLACK);
+                ((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
             } else{
+                tvPulang.setText("--:--:--");
+                tvMasuk.setText("--:--:--");
+                tvKet.setText("Tanpa Keterangan");
+                tvKet.setTextColor(ApiTool.getTakColor());
                 ((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
             }
 
@@ -114,7 +211,7 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
             String lbl = String.valueOf(day)+"/"+String.valueOf(month+1);
             tvTgl.setText(lbl);
             Random mRandom = new Random();
-            final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
+            //final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
             //((GradientDrawable) tvTgl.getBackground()).setColor(Color.LTGRAY);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

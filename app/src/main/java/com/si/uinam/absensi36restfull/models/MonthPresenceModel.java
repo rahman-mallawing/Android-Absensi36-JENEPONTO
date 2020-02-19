@@ -31,6 +31,9 @@ public class MonthPresenceModel {
     @SerializedName("jam_pulang")
     protected String jamPulang;
 
+    @SerializedName("ta_record_exist")
+    protected int recordExist;
+
     @SerializedName("day_off")
     protected int day_off;
 
@@ -138,5 +141,9 @@ public class MonthPresenceModel {
 
     public String getKet() {
         return ket;
+    }
+
+    public int getRecordExist() {
+        return recordExist;
     }
 }

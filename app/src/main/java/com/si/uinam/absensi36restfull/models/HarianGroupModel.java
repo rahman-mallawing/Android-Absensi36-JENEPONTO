@@ -32,6 +32,9 @@ public class HarianGroupModel implements Parcelable {
     @SerializedName("jam_pulang")
     protected String jamPulang;
 
+    @SerializedName("ta_record_exist")
+    protected int recordExist;
+
     @SerializedName("day_off")
     protected int day_off;
 
@@ -58,6 +61,10 @@ public class HarianGroupModel implements Parcelable {
 
     @SerializedName("foto")
     protected String foto;
+
+    public int getRecordExist() {
+        return recordExist;
+    }
 
     public void setGroupId(int groupId) {
         this.groupId = groupId;

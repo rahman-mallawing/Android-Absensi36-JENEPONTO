@@ -27,7 +27,7 @@ public class ApiTool {
 
     public static String getTodayDateString(Context context) {
         if(ApiHelper.isTanggal(context)){
-            String msg = "Peringatan: Tanggal bukan waktu real";
+            String msg = "Peringatan: Tanggal tidak diset hari ini";
             Toast toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
             View vi = toast.getView();
             vi.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);

@@ -12,8 +12,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.GroupModel;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,7 +24,9 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
+import java.util.TimeZone;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +35,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
 
     private ArrayList<GroupModel> groupList = new ArrayList<>();
     private OnItemClickCallback itemClickCallback;
+    private String tglString;
 
     public void setGroupList(ArrayList<GroupModel> groupModelArrayList) {
         groupList.clear();
@@ -40,6 +46,10 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
 
     public void setItemClickCallback(OnItemClickCallback itemClickCallback) {
         this.itemClickCallback = itemClickCallback;
+    }
+
+    public void setTglString(String tglString) {
+        this.tglString = tglString;
     }
 
     @NonNull
@@ -98,12 +108,26 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             tvGroup.setText(groupModel.getGrup());
             //txvHadir.setText(String.valueOf(groupModel.getHadir()));
             //
-            Date currentDate = new Date();
-            Calendar cal = Calendar.getInstance();
-            String hari = new SimpleDateFormat("EEE").format(cal.getTime());
-            String bulan = new SimpleDateFormat("MMM").format(cal.getTime());
-            String tahun = new SimpleDateFormat("YYYY").format(cal.getTime());
-            tvMonthYear.setText(hari+"-"+bulan+"-"+tahun);
+            Log.d("TGL", tglString);
+
+            //Date currentDate = new Date();
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            Date date = null;
+            try {
+                date = format.parse(tglString);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                Log.d("TGL", date.toString());
+                String hari = new SimpleDateFormat("EEE").format(cal.getTime());
+                String bulan = new SimpleDateFormat("MMM").format(cal.getTime());
+                String tahun = new SimpleDateFormat("YYYY").format(cal.getTime());
+                tvMonthYear.setText(hari+"-"+bulan+"-"+tahun);
+            } catch (ParseException e) {
+                tvMonthYear.setText("!Date Err");
+                e.printStackTrace();
+            };
+
+
             String[] result = groupModel.getGrup().split(" ");
             char hrf = 'X';
             if (result.length == 1){
@@ -117,27 +141,32 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             tvPersenHadir.setText((String.format("%.2f", persenHadir))+"%");
             tvHadir.setText("Kehadiran: "+hadir+"\\"+jumPegawai);
             if(persenHadir >= 80){
-                tvPersenHadir.setTextColor(Color.parseColor("#006400"));
+                tvPersenHadir.setTextColor(ApiTool.getHadirColor());
+                ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getHadirColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GREEN);
             } else if (persenHadir >= 70){
-                tvPersenHadir.setTextColor(Color.BLUE);
+                tvPersenHadir.setTextColor(ApiTool.BLUE_SMOOTH);
+                ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.BLUE_SMOOTH);
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.BLUE);
             }else if (persenHadir >= 51){
-                tvPersenHadir.setTextColor(Color.YELLOW);
+                tvPersenHadir.setTextColor(ApiTool.getDinasColor());
+                ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getDinasColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.YELLOW);
-            }else if (persenHadir >= 5){
-                tvPersenHadir.setTextColor(Color.RED);
+            }else if (persenHadir >= 1){
+                tvPersenHadir.setTextColor(ApiTool.getTakColor());
+                ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getTakColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.RED);
             }else {
                 tvPersenHadir.setTextColor(Color.GRAY);
+                ((GradientDrawable) mIcon.getBackground()).setColor(Color.LTGRAY);
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GRAY);
             }
             String details = "Terlambat: "+ groupModel.getJumlahTerlambat() +", Dinas Luar: "+ groupModel.getDinasLuar() +", Cuti: "+ groupModel.getCuti() +", Izin: "+ groupModel.getIzin();
             //tvDetails.setText(details);
             mIcon.setText(String.valueOf(hrf).toUpperCase());
             Random mRandom = new Random();
-            final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
-            ((GradientDrawable) mIcon.getBackground()).setColor(color);
+            //final int color = Color.argb(255, mRandom.nextInt(256), mRandom.nextInt(256), mRandom.nextInt(256));
+            //((GradientDrawable) mIcon.getBackground()).setColor(color);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -77,6 +77,7 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
             tvUrutan = itemView.findViewById(R.id.tv_urutan);
             tvStsHadir = itemView.findViewById(R.id.tv_sts_hadir);
             tvNi = itemView.findViewById(R.id.tv_ni);
+
             //urutan = urutan +1;
         }
 
@@ -98,7 +99,11 @@ public class IdentityListAdapter extends RecyclerView.Adapter<IdentityListAdapte
 
             tvNi.setText(harianGroupModel.getNap());
 
-            if(harianGroupModel.getHadir() == 1){
+            if(harianGroupModel.getRecordExist() != 1){
+                ((GradientDrawable) tvStsHadir.getBackground()).setColor(Color.LTGRAY);
+                tvStsHadir.setTextColor(ApiTool.getTakColor());
+                tvStsHadir.setText("No Record Yet!");
+            } else if(harianGroupModel.getHadir() == 1){
                 ((GradientDrawable) tvStsHadir.getBackground()).setColor(ApiTool.getHadirColor());
                 tvStsHadir.setTextColor(Color.WHITE);
                 tvStsHadir.setText("Hadir");

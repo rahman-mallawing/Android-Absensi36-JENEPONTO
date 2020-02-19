@@ -95,6 +95,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
         Log.d("TES-VIEW-MODEL", "1. assdd Connect internet API");
         rcvGroup.setLayoutManager(new LinearLayoutManager(getContext()));
         groupListAdapter = new GroupListAdapter();
+        groupListAdapter.setTglString(ApiTool.getTodayDateString(getActivity()));
         groupListAdapter.setItemClickCallback(new GroupListAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(GroupModel groupModel) {
