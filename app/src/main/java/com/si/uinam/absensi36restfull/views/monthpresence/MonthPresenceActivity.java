@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
     private ProgressBar progressBar;
     private MonthPresenceListAdapter monthPresenceListAdapter;
     private RecyclerView rcvPresence;
+    private CircleImageView imgIdentity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         collapsingToolbar = findViewById(R.id.collapsingToolbar);
         collapsingToolbar.setTitle("Squirrel");
 
+        imgIdentity = findViewById(R.id.img_identity);
         progressBar = findViewById(R.id.presenceProgressBar);
         rcvPresence = findViewById(R.id.rcv_presence);
         progressBar.setVisibility(View.VISIBLE);

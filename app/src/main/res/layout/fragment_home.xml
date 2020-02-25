@@ -72,7 +72,7 @@
                         android:layout_marginRight="2dp"
                         android:gravity="center"
                         android:text="Pegawai"
-                        android:textColor="#f2f2f2"
+                        android:textColor="@color/cardview_dark_background"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -101,7 +101,7 @@
                         android:text="Group"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                         android:text="Hadir"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_hadir"
@@ -154,7 +154,7 @@
                         android:text="TAK"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_tak"
@@ -181,7 +181,7 @@
                         android:text="Dinas"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_dinas"
@@ -208,7 +208,7 @@
                         android:text="Cuti"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_cuti"
@@ -235,7 +235,7 @@
                         android:text="Izin"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_izin"
@@ -261,7 +261,7 @@
                         android:text="Sakit"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_sakit"
@@ -286,7 +286,7 @@
                         android:text="Terlambat"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_terlambat"
@@ -312,7 +312,7 @@
                         android:text="Cepat Pulang"
                         android:gravity="center"
                         android:textStyle="bold"
-                        android:textColor="#f2f2f2"/>
+                        android:textColor="@color/cardview_dark_background"/>
 
                     <TextView
                         android:id="@+id/tv_cp"
@@ -408,7 +408,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:gravity="center"
-                            android:text="Dinas Luar"
+                            android:text="Dinas"
                             android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 

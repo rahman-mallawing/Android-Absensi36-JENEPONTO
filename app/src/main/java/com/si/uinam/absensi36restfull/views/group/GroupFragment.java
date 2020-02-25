@@ -31,6 +31,7 @@ import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.GroupViewModel;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identitywithpagelib.activity.IdentityWithPageActivity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -98,15 +99,16 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
         groupListAdapter.setTglString(ApiTool.getTodayDateString(getActivity()));
         groupListAdapter.setItemClickCallback(new GroupListAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(GroupModel groupModel) {
+            public void onItemClicked(GroupModel groupModel, String identity) {
                 IdentityGroup identityGroup = new IdentityGroup();
                 identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.GROUP_IDENTITY);
                 identityGroup.setGroup_id(groupModel.getId());
                 identityGroup.setInfo(groupModel.getGrup());
+                identityGroup.setIdentity(identity);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + groupModel.getGrup(), Toast.LENGTH_SHORT).show();
-                Intent identityIntent = new Intent(getActivity(), IdentityActivity.class);
-                identityIntent.putExtra(IdentityActivity.EXTRA_IDENTITY, identityGroup);
-                startActivity(identityIntent);
+                Intent identityIntentPagingLib = new Intent(getActivity(), IdentityWithPageActivity.class);
+                identityIntentPagingLib.putExtra(IdentityWithPageActivity.EXTRA_IDENTITY, identityGroup);
+                startActivity(identityIntentPagingLib);
             }
         });
 

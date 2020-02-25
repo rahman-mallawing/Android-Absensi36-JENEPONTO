@@ -27,6 +27,7 @@ public class ApiTool {
 
     public static String getTodayDateString(Context context) {
         if(ApiHelper.isTanggal(context)){
+            //return ApiHelper.getTanggal(context);
             String msg = "Peringatan: Tanggal tidak diset hari ini";
             Toast toast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
             View vi = toast.getView();

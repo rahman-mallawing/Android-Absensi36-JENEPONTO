@@ -170,7 +170,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClickCallback.onItemClicked(groupList.get(getAdapterPosition()));
+                    itemClickCallback.onItemClicked(groupList.get(getAdapterPosition()), mIcon.getText().toString());
                 }
             });
 
@@ -193,6 +193,6 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
     }
 
     public interface OnItemClickCallback{
-        void onItemClicked(GroupModel groupModel);
+        void onItemClicked(GroupModel groupModel, String identity);
     }
 }

@@ -8,6 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Time;
 import java.util.Date;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+
 public class HarianGroupModel implements Parcelable {
 
 
@@ -254,4 +258,25 @@ public class HarianGroupModel implements Parcelable {
             return new HarianGroupModel[size];
         }
     };
+
+    public static DiffUtil.ItemCallback<HarianGroupModel> DIFF_CALLBACK = new DiffUtil.ItemCallback<HarianGroupModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull HarianGroupModel oldItem, @NonNull HarianGroupModel newItem) {
+            return newItem.getNap() == oldItem.getNap();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull HarianGroupModel oldItem, @NonNull HarianGroupModel newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == this)
+            return true;
+
+        HarianGroupModel hgm = (HarianGroupModel) obj;
+        return hgm.getNap() == this.getNap();
+    }
 }

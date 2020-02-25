@@ -8,9 +8,18 @@ public class IdentityGroup implements Parcelable {
     private String info;
     private int group_id;
     private int sts_kehadiran;
+    private String identity;
 
     public enum TYPE {
         GROUP_IDENTITY, PRESENCE_IDENTITY
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 
     public TYPE getGROUP_TYPE() {
@@ -57,6 +66,7 @@ public class IdentityGroup implements Parcelable {
         dest.writeString(this.info);
         dest.writeInt(this.group_id);
         dest.writeInt(this.sts_kehadiran);
+        dest.writeString(this.identity);
     }
 
     public IdentityGroup() {
@@ -68,6 +78,7 @@ public class IdentityGroup implements Parcelable {
         this.info = in.readString();
         this.group_id = in.readInt();
         this.sts_kehadiran = in.readInt();
+        this.identity = in.readString();
     }
 
     public static final Parcelable.Creator<IdentityGroup> CREATOR = new Parcelable.Creator<IdentityGroup>() {

@@ -6,6 +6,7 @@ import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.services.IdentityService;
 import com.si.uinam.absensi36restfull.services.ServiceCallbackInterface;
+import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,14 @@ import androidx.lifecycle.ViewModel;
 public class IdentityViewModel extends ViewModel {
     private MutableLiveData<ArrayList<HarianGroupModel>> harianGrupList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();
+
+    private void loadFirstPage(Context context, AuthenticationListener authenticationListener, String tgl, IdentityGroup identityGroup) {
+
+    }
+
+    private void loadNextPage(Context context, AuthenticationListener authenticationListener, String tgl, IdentityGroup identityGroup) {
+
+    }
 
     public void loadHarianGrupList(Context context, AuthenticationListener authenticationListener, int groupId, String tgl){
         IdentityService.create(context, authenticationListener)

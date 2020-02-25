@@ -75,6 +75,23 @@ public interface ApiService {
     @POST("/api/v3/presensi/kelola/laporan-bulanan-pegawai")
     Call<ArrayList<MonthPresenceModel>> getLaporanBulanan(@Body PresenceRequestForm body);
 
+    /*pagination */
+    @GET("/api/v3/presensi/kelola/laporan-harian-absen")
+    Call<PaginationModel<HarianGroupModel>> getLaporanHarianAbsenWithPaging(
+            @Query("tgl") String tgl,
+            @Query("sts_kehadiran") int sts_kehadiran,
+            @Query("page") long page,
+            @Query("page_size") int pageSize);
+
+    @GET("/api/v3/presensi/kelola/laporan-harian-grup")
+    Call<PaginationModel<HarianGroupModel>> getLaporanHarianGrupWithPaging(
+            @Query("tgl") String tgl,
+            @Query("grup_id") int grup_id,
+            @Query("page") long page,
+            @Query("page_size") int pageSize);
+
+
+
 
 
 }

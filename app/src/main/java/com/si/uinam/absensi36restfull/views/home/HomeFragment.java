@@ -64,6 +64,8 @@ import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identitypagination.IdentityPaginationActivity;
+import com.si.uinam.absensi36restfull.views.identitywithpagelib.activity.IdentityWithPageActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -313,8 +315,8 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
             //set1.setFillDrawable(drawable);
             set1.setFillColor(Color.LTGRAY);
             if (Utils.getSDKInt() >= 18) {
-                //Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.fade_blue);
-                //set1.setFillDrawable(drawable);
+                 drawable = ContextCompat.getDrawable(getActivity(), R.drawable.fade_blue);
+                set1.setFillDrawable(drawable);
             } else {
                 //set1.setFillColor(Color.DKGRAY);
             }
@@ -521,22 +523,22 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.cv_mnu_tak:
-                loadIdentity(0, "TAK");
+                loadIdentityPagingLib(0, "TAK", "T");
                 break;
             case R.id.cv_mnu_hadir:
-                loadIdentity(1, "HADIR");
+                loadIdentityPagingLib(1, "HADIR", "H");
                 break;
             case R.id.cv_mnu_dinas:
-                loadIdentity(2, "DINAS LUAR");
+                loadIdentityPagingLib(2, "DINAS", "D");
                 break;
             case R.id.cv_mnu_cuti:
-                loadIdentity(3, "CUTI");
+                loadIdentityPagingLib(3, "CUTI", "C");
                 break;
             case R.id.cv_mnu_izin:
-                loadIdentity(4, "IZIN");
+                loadIdentityPagingLib(4, "IZIN", "I");
                 break;
             case R.id.cv_mnu_sakit:
-                loadIdentity(5, "SAKIT");
+                loadIdentityPagingLib(5, "SAKIT", "S");
                 break;
 
         }
@@ -552,5 +554,30 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         Intent identityIntent = new Intent(getActivity(), IdentityActivity.class);
         identityIntent.putExtra(IdentityActivity.EXTRA_IDENTITY, identityGroup);
         startActivity(identityIntent);
+    }
+
+    private void loadIdentityPaging(int stsKehadiran, String info){
+        Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
+        IdentityGroup identityGroup = new IdentityGroup();
+        identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
+        identityGroup.setSts_kehadiran(stsKehadiran);
+        identityGroup.setInfo(info);
+        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();
+        Intent identityIntentPaging = new Intent(getActivity(), IdentityPaginationActivity.class);
+        identityIntentPaging.putExtra(IdentityPaginationActivity.EXTRA_IDENTITY, identityGroup);
+        startActivity(identityIntentPaging);
+    }
+
+    private void loadIdentityPagingLib(int stsKehadiran, String info, String identity){
+        Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
+        IdentityGroup identityGroup = new IdentityGroup();
+        identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
+        identityGroup.setSts_kehadiran(stsKehadiran);
+        identityGroup.setInfo(info);
+        identityGroup.setIdentity(identity);
+        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();
+        Intent identityIntentPagingLib = new Intent(getActivity(), IdentityWithPageActivity.class);
+        identityIntentPagingLib.putExtra(IdentityWithPageActivity.EXTRA_IDENTITY, identityGroup);
+        startActivity(identityIntentPagingLib);
     }
 }
