@@ -18,9 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.MonthPresenceModel;
@@ -63,6 +66,17 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         HarianGroupModel harianGroupExtra = getIntent().getParcelableExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL);
 
         getSupportActionBar().setTitle("Kehadiran " + harianGroupExtra.getNama());
+
+
+        RequestOptions requestOptions = new RequestOptions().override(100, 100);
+        requestOptions.placeholder(R.drawable.placeholder);
+        requestOptions.error(R.drawable.user);
+        String url = ApiHelper.getImgBaseUrl() + harianGroupExtra.getFoto();
+        Log.d("RETROFIT-TEST-URL", url);
+        Glide.with(this)
+                .load(url)
+                .apply(requestOptions)
+                .into(imgIdentity);
 
         rcvPresence.setLayoutManager(new LinearLayoutManager(this));
         monthPresenceListAdapter = new MonthPresenceListAdapter();
