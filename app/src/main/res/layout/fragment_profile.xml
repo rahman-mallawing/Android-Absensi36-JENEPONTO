@@ -8,14 +8,26 @@
     <!-- fragment_edit_name.xml -->
     <LinearLayout
         android:id="@+id/edit_name"
-        android:layout_width="350dp"
-        android:layout_height="160dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:padding="16dp"
         android:orientation="vertical"  >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_identity"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/user"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/cardview_light_background"/>
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textStyle="bold"

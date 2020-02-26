@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.identitywithpagelib.activity.IdentityWithPageActivity"></activity>
+        <activity android:name=".views.checklogpage.ChecklogActivity"></activity>
+        <activity android:name=".views.identitywithpagelib.activity.IdentityWithPageActivity" />
         <activity android:name=".views.identitypagination.IdentityPaginationActivity" />
         <activity android:name=".views.search.SearchActivity" />
         <activity android:name=".views.monthpresence.MonthPresenceActivity" />

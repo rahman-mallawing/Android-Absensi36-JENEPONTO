@@ -59,10 +59,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme);
+                R.style.CustomProgress);
 
+
+        //progressDialog.setContentView(R.layout.item_progress_identity);
+        progressDialog.getWindow().setGravity(Gravity.CENTER_HORIZONTAL);
         progressDialog.setIndeterminate(true);
-
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 

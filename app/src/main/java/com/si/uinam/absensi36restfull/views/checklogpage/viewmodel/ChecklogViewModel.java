@@ -1,9 +1,9 @@
-package com.si.uinam.absensi36restfull.views.identitywithpagelib.viewmodel;
+package com.si.uinam.absensi36restfull.views.checklogpage.viewmodel;
 
-import com.si.uinam.absensi36restfull.models.HarianGroupModel;
-import com.si.uinam.absensi36restfull.services.AuthenticationListener;
+import com.si.uinam.absensi36restfull.views.checklogpage.datasource.ChecklogDataSource;
+import com.si.uinam.absensi36restfull.views.checklogpage.datasource.factory.ChecklogDataFactory;
+import com.si.uinam.absensi36restfull.views.checklogpage.model.ChecklogModel;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.AppController;
-import com.si.uinam.absensi36restfull.views.identitywithpagelib.datasource.factory.IdentityDataFactory;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.utils.NetworkState;
 
 import java.util.concurrent.Executor;
@@ -15,23 +15,22 @@ import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-public class IdentityPageViewModel extends ViewModel {
+public class ChecklogViewModel extends ViewModel {
 
     private Executor executor;
     private LiveData<NetworkState> networkState;
-    private LiveData<PagedList<HarianGroupModel>> articleLiveData;
-
+    private LiveData<PagedList<ChecklogModel>> checklogLiveData;
     private AppController appController;
 
-    public IdentityPageViewModel(AppController appController) {
-        this.appController =appController;
+    public ChecklogViewModel(AppController appController) {
+        this.appController = appController;
         init();
     }
 
     private void init() {
         executor = Executors.newFixedThreadPool(5);
-        IdentityDataFactory identityDataFactory = new IdentityDataFactory(appController);
-        networkState = Transformations.switchMap(identityDataFactory.getMutableLiveData(),
+        ChecklogDataFactory checklogDataFactory = new ChecklogDataFactory(appController);
+        networkState = Transformations.switchMap(checklogDataFactory.getMutableLiveData(),
                 dataSource -> dataSource.getNetworkState());
 
         PagedList.Config pagedListConfig =
@@ -40,7 +39,7 @@ public class IdentityPageViewModel extends ViewModel {
                         .setInitialLoadSizeHint(20)
                         .setPageSize(20).build();
 
-        articleLiveData = (new LivePagedListBuilder(identityDataFactory, pagedListConfig))
+        checklogLiveData = (new LivePagedListBuilder(checklogDataFactory, pagedListConfig))
                 .setFetchExecutor(executor)
                 .build();
     }
@@ -49,8 +48,7 @@ public class IdentityPageViewModel extends ViewModel {
         return networkState;
     }
 
-    public LiveData<PagedList<HarianGroupModel>> getArticleLiveData() {
-        return articleLiveData;
+    public LiveData<PagedList<ChecklogModel>> getChecklogLiveData() {
+        return checklogLiveData;
     }
-
 }

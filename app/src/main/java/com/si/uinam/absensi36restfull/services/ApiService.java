@@ -10,6 +10,7 @@ import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
 import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.models.UserModel;
+import com.si.uinam.absensi36restfull.views.checklogpage.model.ChecklogModel;
 import com.si.uinam.absensi36restfull.views.monthpresence.PresenceRequestForm;
 
 import java.util.ArrayList;
@@ -87,6 +88,12 @@ public interface ApiService {
     Call<PaginationModel<HarianGroupModel>> getLaporanHarianGrupWithPaging(
             @Query("tgl") String tgl,
             @Query("grup_id") int grup_id,
+            @Query("page") long page,
+            @Query("page_size") int pageSize);
+
+    @GET("/api/v3/presensi/sinkronisasi/presensi-log-harian")
+    Call<PaginationModel<ChecklogModel>> getChecklog(
+            @Query("tgl") String tgl,
             @Query("page") long page,
             @Query("page_size") int pageSize);
 

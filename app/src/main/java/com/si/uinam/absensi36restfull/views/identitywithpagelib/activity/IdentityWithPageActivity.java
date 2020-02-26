@@ -52,6 +52,7 @@ public class IdentityWithPageActivity extends AppCompatActivity implements Authe
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
         binding.btnNoResult.setOnClickListener(view -> {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
+            onSupportNavigateUp();
         });
 
         binding.identityProgressBar.setVisibility(View.VISIBLE);
@@ -67,20 +68,21 @@ public class IdentityWithPageActivity extends AppCompatActivity implements Authe
 
         identityPageViewModel.getArticleLiveData().observe(this, pageList -> {
             Log.d("TES-HASIL", pageList.toString());
-
+            if(pageList.isEmpty()){
+                //binding.llNoResult.setVisibility(View.VISIBLE);
+            }
             adapter.submitList(pageList);
         });
 
         identityPageViewModel.getNetworkState().observe(this, networkState -> {
 
-            adapter.setNetworkState(networkState);
-        });
-
-        identityPageViewModel.getInitialState().observe(this, initialState -> {
-            if(initialState == NetworkState.LOADED){
+            if(networkState == NetworkState.LOADED){
                 showLoading(false);
+            }else if (networkState == NetworkState.EMPTY_LOADED){
+                showLoading(false);
+                binding.llNoResult.setVisibility(View.VISIBLE);
             }
-
+            adapter.setNetworkState(networkState);
         });
 
         adapter.setItemClickCallback(new IdentityPageListAdapter.OnItemClickCallback() {

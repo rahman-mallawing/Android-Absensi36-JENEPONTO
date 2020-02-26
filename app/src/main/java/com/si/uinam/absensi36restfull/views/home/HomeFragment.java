@@ -62,6 +62,7 @@ import com.si.uinam.absensi36restfull.models.StatistikModel;
 import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
+import com.si.uinam.absensi36restfull.views.checklogpage.ChecklogActivity;
 import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
 import com.si.uinam.absensi36restfull.views.identitypagination.IdentityPaginationActivity;
@@ -81,7 +82,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     private PieChart chartPie;
     private LineChart chartLine;
     private BarChart chart;
-    private CircleImageView cvTakBtn, cvHadirBtn, cvDinasBtn, cvCutiBtn, cvIzinBtn, cvSakitBtn;
+    private CircleImageView cvTakBtn, cvHadirBtn, cvDinasBtn, cvCutiBtn, cvIzinBtn, cvSakitBtn, cvLainLainBtn, cvChecklogBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -218,6 +219,12 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
 
         cvSakitBtn = root.findViewById(R.id.cv_mnu_sakit);
         cvSakitBtn.setOnClickListener(this);
+
+        cvLainLainBtn = root.findViewById(R.id.cv_mnu_lain_lain);
+        cvLainLainBtn.setOnClickListener(this);
+
+        cvChecklogBtn = root.findViewById(R.id.cv_mnu_checklog);
+        cvChecklogBtn.setOnClickListener(this);
 
 
         homeProgressBar = root.findViewById(R.id.homeProgressBar);
@@ -413,13 +420,14 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
 
         //X-axis
         XAxis xAxis = chart.getXAxis();
-        xAxis.setGranularity(1f);
+        //xAxis.setGranularity(1f);
         xAxis.setLabelRotationAngle(+90);
         xAxis.setTextSize(6f);
         xAxis.setGranularityEnabled(true);
         xAxis.setCenterAxisLabels(true);
         xAxis.setDrawGridLines(false);
-        xAxis.setLabelCount(12);
+        xAxis.setLabelCount(xVals.size());
+        //xAxis.setGranularity(1f);
         //xAxis.setAxisMaximum(13);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xVals));
@@ -540,32 +548,20 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
             case R.id.cv_mnu_sakit:
                 loadIdentityPagingLib(5, "SAKIT", "S");
                 break;
+            case R.id.cv_mnu_lain_lain:
+                loadIdentityPagingLib(6, "LAIN-LAIN", "L");
+                break;
+            case R.id.cv_mnu_checklog:
+                loadChecklogActivity();
+                break;
 
         }
     }
 
-    private void loadIdentity(int stsKehadiran, String info){
-        Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
-        IdentityGroup identityGroup = new IdentityGroup();
-        identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
-        identityGroup.setSts_kehadiran(stsKehadiran);
-        identityGroup.setInfo(info);
-        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();
-        Intent identityIntent = new Intent(getActivity(), IdentityActivity.class);
-        identityIntent.putExtra(IdentityActivity.EXTRA_IDENTITY, identityGroup);
-        startActivity(identityIntent);
-    }
-
-    private void loadIdentityPaging(int stsKehadiran, String info){
-        Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
-        IdentityGroup identityGroup = new IdentityGroup();
-        identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
-        identityGroup.setSts_kehadiran(stsKehadiran);
-        identityGroup.setInfo(info);
-        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();
-        Intent identityIntentPaging = new Intent(getActivity(), IdentityPaginationActivity.class);
-        identityIntentPaging.putExtra(IdentityPaginationActivity.EXTRA_IDENTITY, identityGroup);
-        startActivity(identityIntentPaging);
+    private void loadChecklogActivity(){
+        Toast.makeText(getContext(), getResources().getString(R.string.app_name), Toast.LENGTH_SHORT).show();
+        Intent checklogIntentPaging = new Intent(getActivity(), ChecklogActivity.class);
+        startActivity(checklogIntentPaging);
     }
 
     private void loadIdentityPagingLib(int stsKehadiran, String info, String identity){

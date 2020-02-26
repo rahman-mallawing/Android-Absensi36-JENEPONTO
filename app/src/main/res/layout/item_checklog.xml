@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class="ItemChecklogBinding"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bgColor"
+        android:paddingTop="5dp">
+
+        <!--
+            "id": 472351,
+             "userid": 633,
+                "name": "I KETUT SUADIARTHA",
+                "SN": "OID7010057011900637",
+                "dev_dept": "4-KEJARI TABANAN",
+                "NRP": "49064244",
+                "checktime": "2020-01-20 06:13:26",
+
+        -->
+        <LinearLayout
+            android:id="@+id/ll_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bgColor"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_userid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="10"
+                android:textColor="@color/textColor"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:text="634" />
+
+            <TextView
+                android:id="@+id/tv_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:textColor="@color/textColor"
+                android:singleLine="true"
+                android:text="Nama" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_name"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_sn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/metaTextColor"
+                android:paddingLeft="5dp"
+                android:text="Nama" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/logTimeTextColor"
+                android:paddingLeft="5dp"
+                android:text="634" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

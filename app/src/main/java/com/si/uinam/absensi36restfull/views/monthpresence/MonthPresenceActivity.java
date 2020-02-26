@@ -2,6 +2,7 @@ package com.si.uinam.absensi36restfull.views.monthpresence;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.MonthPresenceModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.MonthPresenceViewModel;
+import com.si.uinam.absensi36restfull.views.profile.FotoFragment;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -77,6 +79,16 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
                 .load(url)
                 .apply(requestOptions)
                 .into(imgIdentity);
+
+        imgIdentity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                FotoFragment editNameDialogFragment = FotoFragment.newInstance("Some Title");
+                editNameDialogFragment.setUrl(url);
+                editNameDialogFragment.show(fm, "fragment_edit_name");
+            }
+        });
 
         rcvPresence.setLayoutManager(new LinearLayoutManager(this));
         monthPresenceListAdapter = new MonthPresenceListAdapter();

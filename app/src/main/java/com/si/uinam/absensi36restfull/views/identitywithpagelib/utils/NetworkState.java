@@ -5,7 +5,8 @@ public class NetworkState {
     public enum Status{
         RUNNING,
         SUCCESS,
-        FAILED
+        FAILED,
+        EMPTY_LOADED
     }
 
 
@@ -13,6 +14,7 @@ public class NetworkState {
     private final String msg;
 
     public static final NetworkState LOADED;
+    public static final NetworkState EMPTY_LOADED;
     public static final NetworkState LOADING;
 
     public NetworkState(Status status, String msg) {
@@ -23,6 +25,7 @@ public class NetworkState {
     static {
         LOADED=new NetworkState(Status.SUCCESS,"Success");
         LOADING=new NetworkState(Status.RUNNING,"Running");
+        EMPTY_LOADED = new NetworkState(Status.EMPTY_LOADED,"INITIAL-EMPTY");
     }
 
     public Status getStatus() {

@@ -12,4 +12,9 @@
     <color name="colorIzin">#FFAB40</color>
     <color name="colorSakit">#FF6E40</color>
 
+    <color name="textColor">#ffffff</color>
+    <color name="metaTextColor">#aeaeae</color>
+    <color name="logTimeTextColor">#00FF00</color>
+    <color name="bgColor">#000000</color>
+
 </resources>

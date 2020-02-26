@@ -33,7 +33,7 @@ public class ApiTool {
             View vi = toast.getView();
             vi.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             TextView text = vi.findViewById(android.R.id.message);
-            toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
             text.setTextColor(Color.WHITE);
             //text.setHeight(100dp);
             toast.show();

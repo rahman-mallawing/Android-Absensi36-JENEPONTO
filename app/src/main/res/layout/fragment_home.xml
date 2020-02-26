@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/homeProgressBar"
-        style="@android:style/Widget.ProgressBar.Inverse"
         android:gravity="center"
         android:elevation="10dp"
         android:indeterminate="true"
@@ -368,11 +367,37 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/cv_mnu_hadir"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/hadir_24px"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="@android:color/holo_green_dark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Hadir"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/cv_mnu_tak"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/fingerprint_24px"
+                            android:src="@drawable/tak_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@android:color/holo_green_dark"/>
 
@@ -399,7 +424,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_group_work_24px"
+                            android:src="@drawable/dinas_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@android:color/holo_green_dark"/>
 
@@ -426,7 +451,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_check_circle_outline_24px"
+                            android:src="@drawable/cuti_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@android:color/holo_green_dark"/>
 
@@ -435,32 +460,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="Cuti"
-                            android:textColor="@android:color/holo_green_dark"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/cv_mnu_hadir"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_done_outline_24px"
-                            app:civ_border_width="2dp"
-                            app:civ_border_color="@android:color/holo_green_dark"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Izin"
                             android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
@@ -486,7 +485,33 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_assignment_24px"
+                            android:src="@drawable/izin_24px"
+                            app:civ_border_width="2dp"
+                            app:civ_border_color="@android:color/holo_green_dark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Izin"
+                            android:textColor="@android:color/holo_green_dark"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/cv_mnu_sakit"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/sakit_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@android:color/holo_green_dark"/>
 
@@ -508,11 +533,11 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/cv_mnu_sakit"
+                            android:id="@+id/cv_mnu_lain_lain"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_donut_small_24px"
+                            android:src="@drawable/terlambat_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="@android:color/holo_green_dark"/>
 
@@ -520,33 +545,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Terlambat"
-                            android:textColor="@android:color/holo_green_dark"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            android:id="@+id/cv_mnu_terlambat"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_done_all_24px"
-                            app:civ_border_width="2dp"
-                            app:civ_border_color="@android:color/holo_green_dark"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Grafik"
+                            android:text="Lain-Lain"
                             android:textColor="@android:color/holo_green_dark"
                             android:textSize="12sp" />
 
@@ -564,7 +563,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="15dp"
-                            android:src="@drawable/ic_work_off_24px"
+                            android:src="@drawable/checklog_24px"
                             app:civ_border_width="2dp"
                             app:civ_border_color="#00574B"/>
 
