@@ -59,7 +59,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="No account yet? Please contact admin"
+            android:text="Belum punya akun? Silahkan hubungi admin."
             android:gravity="center"
             android:textSize="16dip"/>
 

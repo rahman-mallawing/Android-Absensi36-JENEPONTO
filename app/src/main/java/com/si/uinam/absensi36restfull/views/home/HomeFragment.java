@@ -185,6 +185,19 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         ((GradientDrawable) tvGroup.getBackground()).setColor(Color.LTGRAY);
     }
 
+    private void setVIewStatistikBackground(){
+        ((GradientDrawable) tvPegawai.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvHadir.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvTak.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvTerlambat.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvDinas.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvCuti.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvIzin.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvSakit.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvCp.getBackground()).setColor(Color.LTGRAY);
+        ((GradientDrawable) tvGroup.getBackground()).setColor(Color.LTGRAY);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -202,6 +215,8 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         tvTerlambat = root.findViewById(R.id.tv_terlambat);
         tvCp = root.findViewById(R.id.tv_cp);
         tvGroup = root.findViewById(R.id.tv_group);
+
+        setVIewStatistikBackground();
 
         cvTakBtn = root.findViewById(R.id.cv_mnu_tak);
         cvTakBtn.setOnClickListener(this);

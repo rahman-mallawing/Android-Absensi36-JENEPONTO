@@ -142,24 +142,24 @@ public class IdentityPageListAdapter extends PagedListAdapter<HarianGroupModel, 
                 binding.tvStsHadir.setText("Hadir");
             } else if (harianGroupModel.getDinasLuar() == 1){
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(ApiTool.getDinasColor());
-                binding.tvStsHadir.setTextColor(Color.BLUE);
+                binding.tvStsHadir.setTextColor(Color.WHITE);
                 binding.tvStsHadir.setText("Dinas Luar");
             }else if (harianGroupModel.getCuti() == 1){
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(ApiTool.getCutiColor());
-                binding.tvStsHadir.setTextColor(Color.YELLOW);
+                binding.tvStsHadir.setTextColor(Color.WHITE);
                 binding.tvStsHadir.setText("Cuti");
             }else if (harianGroupModel.getIzin() == 1){
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(ApiTool.getIzinColor());
-                binding.tvStsHadir.setTextColor(Color.RED);
+                binding.tvStsHadir.setTextColor(Color.WHITE);
                 binding.tvStsHadir.setText("Izin");
             }else if (harianGroupModel.getSakit() == 1){
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(ApiTool.getSakitColor());
-                binding.tvStsHadir.setTextColor(Color.RED);
+                binding.tvStsHadir.setTextColor(Color.WHITE);
                 binding.tvStsHadir.setText("Sakit");
             }else if (harianGroupModel.getAbsen() == 1){
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(ApiTool.getTakColor());
-                binding.tvStsHadir.setTextColor(Color.RED);
-                binding.tvStsHadir.setText("TAK");
+                binding.tvStsHadir.setTextColor(Color.WHITE);
+                binding.tvStsHadir.setText("Tanpa Keterangan");
             }else {
                 ((GradientDrawable) binding.tvStsHadir.getBackground()).setColor(Color.LTGRAY);
                 binding.tvStsHadir.setTextColor(Color.GRAY);

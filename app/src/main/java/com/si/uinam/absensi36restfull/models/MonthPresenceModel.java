@@ -28,8 +28,14 @@ public class MonthPresenceModel {
     @SerializedName("jam_masuk")
     protected String jamMasuk;
 
+    @SerializedName("ta_menit_terlambat")
+    protected int menitTerlambat;
+
     @SerializedName("jam_pulang")
     protected String jamPulang;
+
+    @SerializedName("ta_menit_cp")
+    protected int menitCp;
 
     @SerializedName("ta_record_exist")
     protected int recordExist;
@@ -66,6 +72,14 @@ public class MonthPresenceModel {
 
     @SerializedName("ket")
     protected String ket;
+
+    public int getMenitTerlambat() {
+        return menitTerlambat;
+    }
+
+    public int getMenitCp() {
+        return menitCp;
+    }
 
     public int getGroupId() {
         return groupId;

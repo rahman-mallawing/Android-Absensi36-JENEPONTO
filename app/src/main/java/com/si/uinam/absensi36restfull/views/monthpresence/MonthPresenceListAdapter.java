@@ -99,27 +99,59 @@ public class MonthPresenceListAdapter extends RecyclerView.Adapter<MonthPresence
                 tvKet.setTextColor(Color.BLACK);
                 ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.BLUE_SMOOTH);
             }else if(monthPresenceModel.getHadir()==1){
+                String terlambat = "";
+                String cepatPulang = "";
                 tvKet.setText("HADIR");
                 tvKet.setTextColor(Color.BLACK);
                 if(monthPresenceModel.getJamMasuk()==null){
-                    tvMasuk.setTextColor(ApiTool.getTakColor());
+                    tvMasuk.setTextColor(ApiTool.getSakitColor());
                     tvMasuk.setText("--:--:--");
-                    tvKet.setText("TERLAMBAT");
-                    tvKet.setTextColor(ApiTool.getTakColor());
+                    terlambat = "TERLAMBAT";
+                    //tvKet.setText("TERLAMBAT");
+                    //tvKet.setTextColor(ApiTool.getTakColor());
                 }else{
-                    tvMasuk.setTextColor(ApiTool.getHadirColor());
-                    tvKet.setTextColor(Color.BLACK);
-                    tvMasuk.setText(monthPresenceModel.getJamMasuk());
+                    if(monthPresenceModel.getMenitTerlambat() > 0){
+                        tvMasuk.setTextColor(ApiTool.getSakitColor());
+                        tvMasuk.setText(monthPresenceModel.getJamMasuk());
+                        terlambat = "TERLAMBAT";
+                        //tvKet.setText("TERLAMBAT");
+                        //tvKet.setTextColor(ApiTool.getTakColor());
+                    }else{
+                        tvMasuk.setTextColor(ApiTool.getHadirColor());
+                        tvKet.setTextColor(Color.BLACK);
+                        tvMasuk.setText(monthPresenceModel.getJamMasuk());
+                    }
+
                 }
                 if(monthPresenceModel.getJamPulang()==null){
-                    tvPulang.setTextColor(ApiTool.getTakColor());
+                    tvPulang.setTextColor(ApiTool.getSakitColor());
                     tvPulang.setText("--:--:--");
-                    tvKet.setText("CEPAT TULANG");
-                    tvKet.setTextColor(ApiTool.getTakColor());
+                    cepatPulang = "CEPAT TULANG";
+                    //tvKet.setText("CEPAT TULANG");
+                    //tvKet.setTextColor(ApiTool.getTakColor());
                 }else{
-                    tvPulang.setTextColor(ApiTool.getHadirColor());
-                    tvKet.setTextColor(Color.BLACK);
-                    tvPulang.setText(monthPresenceModel.getJamPulang());
+                    if(monthPresenceModel.getMenitCp() > 0){
+                        tvPulang.setTextColor(ApiTool.getSakitColor());
+                        tvPulang.setText(monthPresenceModel.getJamPulang());
+                        cepatPulang = "CEPAT TULANG";
+                        //tvKet.setText("CEPAT TULANG");
+                        //tvKet.setTextColor(ApiTool.getTakColor());
+                    }else{
+                        tvPulang.setTextColor(ApiTool.getHadirColor());
+                        tvKet.setTextColor(Color.BLACK);
+                        tvPulang.setText(monthPresenceModel.getJamPulang());
+                    }
+
+                }
+                if(terlambat!="" && cepatPulang != ""){
+                    tvKet.setText(terlambat+"/"+cepatPulang);
+                    tvKet.setTextColor(ApiTool.getTakColor());
+                }else if(terlambat!=""){
+                    tvKet.setText(terlambat);
+                    tvKet.setTextColor(ApiTool.getTakColor());
+                }else if(cepatPulang!=""){
+                    tvKet.setText(cepatPulang);
+                    tvKet.setTextColor(ApiTool.getTakColor());
                 }
                 ((GradientDrawable) tvTgl.getBackground()).setColor(ApiTool.getHadirColor());
             }else if(monthPresenceModel.getDinasLuar()==1){
