@@ -12,6 +12,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,8 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
     private ProgressBar progressBar;
     private SearchListAdapter searchListAdapter;
     private RecyclerView rcvSearch;
+    private LinearLayout linearLayout;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,12 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
 
         progressBar = findViewById(R.id.searchProgressBar);
         rcvSearch = findViewById(R.id.rcv_search);
+        linearLayout = findViewById(R.id.ll_no_result);
+        btnBack = findViewById(R.id.btn_no_data);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
 
+        linearLayout.setVisibility(View.VISIBLE);
         String query = getIntent().getStringExtra(SearchActivity.EXTRA_SEARCH);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Cari pegawai: "+query);
@@ -60,6 +67,14 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
                 Intent presenceIntent = new Intent(SearchActivity.this, MonthPresenceActivity.class);
                 presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
                 startActivity(presenceIntent);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
+                onSupportNavigateUp();
             }
         });
         searchListAdapter.notifyDataSetChanged();
@@ -88,6 +103,9 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
                     searchListAdapter.setIdentityList(identityModelPaginationModel.getArrayData());
                     Log.d("TES-SEARCH", identityModelPaginationModel.getArrayData().toString());
                     showLoading(false);
+                    if(identityModelPaginationModel.getArrayData().isEmpty()){
+                        linearLayout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });
@@ -96,6 +114,7 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
     }
 
     private void showLoading(Boolean state) {
+        linearLayout.setVisibility(View.GONE);
         if(progressBar == null) {
             Log.d("TES-progressBar", "NULL NULL NULL");
             return;

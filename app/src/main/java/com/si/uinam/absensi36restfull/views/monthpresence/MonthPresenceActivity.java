@@ -90,7 +90,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
                 if (scrollRange + verticalOffset == 0) {
                     tvIdentity.setVisibility(View.VISIBLE);
                     tvIdentity.setText(harianGroupExtra.getNama());
-                    getSupportActionBar().setTitle("");
+                    getSupportActionBar().setTitle(harianGroupExtra.getNama());
                     isShow = true;
                 } else if(isShow) {
                     tvIdentity.setVisibility(View.GONE);
