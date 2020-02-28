@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.database.DatabaseUtils;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.databinding.IdentityActivityBinding;
@@ -46,8 +48,34 @@ public class IdentityWithPageActivity extends AppCompatActivity implements Authe
         IdentityGroup identityGroup = getIntent().getParcelableExtra(IdentityWithPageActivity.EXTRA_IDENTITY);
 
         getSupportActionBar().setTitle("Pegawai " + identityGroup.getInfo());
+        binding.tvBarInfo.setText(identityGroup.getInfo());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ((GradientDrawable) binding.tvIdentity.getBackground()).setColor(identityGroup.getColor());
+        binding.tvIdentity.setText(identityGroup.getInitial());
+
+        binding.appBarLyt.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    binding.tvBarInfo.setVisibility(View.VISIBLE);
+                    getSupportActionBar().setTitle(identityGroup.getInfo());
+                    isShow = true;
+                } else if(isShow) {
+                    binding.tvBarInfo.setVisibility(View.GONE);
+                    getSupportActionBar().setTitle("Pegawai " + identityGroup.getInfo());
+                    isShow = false;
+                }
+            }
+        });
 
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
         binding.btnNoResult.setOnClickListener(view -> {

@@ -546,25 +546,25 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.cv_mnu_tak:
-                loadIdentityPagingLib(0, "TAK", "T");
+                loadIdentityPagingLib(0, "TAK", "T", ApiTool.getTakColor());
                 break;
             case R.id.cv_mnu_hadir:
-                loadIdentityPagingLib(1, "HADIR", "H");
+                loadIdentityPagingLib(1, "HADIR", "H", ApiTool.getHadirColor());
                 break;
             case R.id.cv_mnu_dinas:
-                loadIdentityPagingLib(2, "DINAS", "D");
+                loadIdentityPagingLib(2, "DINAS", "D", ApiTool.getDinasColor());
                 break;
             case R.id.cv_mnu_cuti:
-                loadIdentityPagingLib(3, "CUTI", "C");
+                loadIdentityPagingLib(3, "CUTI", "C", ApiTool.getCutiColor());
                 break;
             case R.id.cv_mnu_izin:
-                loadIdentityPagingLib(4, "IZIN", "I");
+                loadIdentityPagingLib(4, "IZIN", "I", ApiTool.getIzinColor());
                 break;
             case R.id.cv_mnu_sakit:
-                loadIdentityPagingLib(5, "SAKIT", "S");
+                loadIdentityPagingLib(5, "SAKIT", "S", ApiTool.getSakitColor());
                 break;
             case R.id.cv_mnu_lain_lain:
-                loadIdentityPagingLib(6, "LAIN-LAIN", "L");
+                loadIdentityPagingLib(6, "LAIN-LAIN", "L", Color.LTGRAY);
                 break;
             case R.id.cv_mnu_checklog:
                 loadChecklogActivity();
@@ -579,11 +579,13 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         startActivity(checklogIntentPaging);
     }
 
-    private void loadIdentityPagingLib(int stsKehadiran, String info, String identity){
+    private void loadIdentityPagingLib(int stsKehadiran, String info, String identity, int color){
         Log.d("TYPE-GROUP", "STATUS: "+stsKehadiran);
         IdentityGroup identityGroup = new IdentityGroup();
         identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.PRESENCE_IDENTITY);
         identityGroup.setSts_kehadiran(stsKehadiran);
+        identityGroup.setInitial(identity);
+        identityGroup.setColor(color);
         identityGroup.setInfo(info);
         identityGroup.setIdentity(identity);
         Toast.makeText(getContext(), getResources().getString(R.string.app_name) + info, Toast.LENGTH_SHORT).show();

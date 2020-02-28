@@ -1,7 +1,10 @@
 package com.si.uinam.absensi36restfull.views.identity;
 
+import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.si.uinam.absensi36restfull.helpers.ApiTool;
 
 public class IdentityGroup implements Parcelable {
     private TYPE GROUP_TYPE;
@@ -9,9 +12,27 @@ public class IdentityGroup implements Parcelable {
     private int group_id;
     private int sts_kehadiran;
     private String identity;
+    private String initial;
+    private int color;
 
     public enum TYPE {
         GROUP_IDENTITY, PRESENCE_IDENTITY
+    }
+
+    public String getInitial() {
+        return initial;
+    }
+
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public String getIdentity() {
@@ -67,6 +88,8 @@ public class IdentityGroup implements Parcelable {
         dest.writeInt(this.group_id);
         dest.writeInt(this.sts_kehadiran);
         dest.writeString(this.identity);
+        dest.writeString(this.initial);
+        dest.writeInt(this.color);
     }
 
     public IdentityGroup() {
@@ -79,6 +102,8 @@ public class IdentityGroup implements Parcelable {
         this.group_id = in.readInt();
         this.sts_kehadiran = in.readInt();
         this.identity = in.readString();
+        this.initial = in.readString();
+        this.color = in.readInt();
     }
 
     public static final Parcelable.Creator<IdentityGroup> CREATOR = new Parcelable.Creator<IdentityGroup>() {

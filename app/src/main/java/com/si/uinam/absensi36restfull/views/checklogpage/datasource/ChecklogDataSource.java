@@ -51,13 +51,22 @@ public class ChecklogDataSource extends PageKeyedDataSource<Long, ChecklogModel>
                     @Override
                     public void onResponse(Call<PaginationModel<ChecklogModel>> call, Response<PaginationModel<ChecklogModel>> response) {
                         if(response.isSuccessful()) {
-                            totalPage = response.body().getLastPage();
-                            Log.i(TAG, "Loading Rang TOTAL PAGE: "+totalPage);
-                            callback.onResult(response.body().getArrayData(), null, 2l);
-                            initialLoading.postValue(NetworkState.LOADED);
-                            networkState.postValue(NetworkState.LOADED);
-                            Log.i(TAG, "Loading Rang SUKSE");
-                            Log.i(TAG, response.raw().toString());
+
+                            if(response.body().getArrayData().isEmpty()){
+                                initialLoading.postValue(NetworkState.EMPTY_LOADED);
+                                networkState.postValue(NetworkState.EMPTY_LOADED);
+                                Log.i(TAG, "Loading Rang EMPTY");
+                            }else{
+                                totalPage = response.body().getLastPage();
+                                Log.i(TAG, "Loading Rang TOTAL PAGE: "+totalPage);
+                                callback.onResult(response.body().getArrayData(), null, 2l);
+                                initialLoading.postValue(NetworkState.LOADED);
+                                networkState.postValue(NetworkState.LOADED);
+                                Log.i(TAG, "Loading Rang SUKSE");
+                                Log.i(TAG, response.raw().toString());
+                            }
+
+
 
                         } else {
                             Log.i(TAG, "Loading Rang USEKSES");

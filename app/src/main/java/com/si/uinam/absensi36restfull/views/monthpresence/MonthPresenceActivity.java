@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
@@ -44,6 +46,9 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
     private MonthPresenceListAdapter monthPresenceListAdapter;
     private RecyclerView rcvPresence;
     private CircleImageView imgIdentity;
+    private AppBarLayout appBarLayout;
+    private CircleImageView imgBarIdentity;
+    private TextView tvIdentity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +69,38 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         rcvPresence = findViewById(R.id.rcv_presence);
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
+        appBarLayout = findViewById(R.id.appBarLyt);
+        tvIdentity = findViewById(R.id.tv_bar_identity);
+
+
 
         HarianGroupModel harianGroupExtra = getIntent().getParcelableExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL);
 
         getSupportActionBar().setTitle("Kehadiran " + harianGroupExtra.getNama());
+        tvIdentity.setGravity(Gravity.CENTER);
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    tvIdentity.setVisibility(View.VISIBLE);
+                    tvIdentity.setText(harianGroupExtra.getNama());
+                    getSupportActionBar().setTitle("");
+                    isShow = true;
+                } else if(isShow) {
+                    tvIdentity.setVisibility(View.GONE);
+                    tvIdentity.setText(harianGroupExtra.getNama());
+                    getSupportActionBar().setTitle("Kehadiran " + harianGroupExtra.getNama());
+                    isShow = false;
+                }
+            }
+        });
+
 
 
         RequestOptions requestOptions = new RequestOptions().override(100, 100);

@@ -104,7 +104,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
         }
 
         public void bind(GroupModel groupModel) {
-
+            int color;
             tvGroup.setText(groupModel.getGrup());
             //txvHadir.setText(String.valueOf(groupModel.getHadir()));
             //
@@ -142,21 +142,26 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             tvHadir.setText("Kehadiran: "+hadir+"\\"+jumPegawai);
             if(persenHadir >= 80){
                 tvPersenHadir.setTextColor(ApiTool.getHadirColor());
+                color = ApiTool.getHadirColor();
                 ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getHadirColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GREEN);
             } else if (persenHadir >= 70){
                 tvPersenHadir.setTextColor(ApiTool.BLUE_SMOOTH);
+                color = ApiTool.BLUE_SMOOTH;
                 ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.BLUE_SMOOTH);
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.BLUE);
             }else if (persenHadir >= 51){
+                color = ApiTool.getDinasColor();
                 tvPersenHadir.setTextColor(ApiTool.getDinasColor());
                 ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getDinasColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.YELLOW);
             }else if (persenHadir >= 1){
+                color = ApiTool.getTakColor();
                 tvPersenHadir.setTextColor(ApiTool.getTakColor());
                 ((GradientDrawable) mIcon.getBackground()).setColor(ApiTool.getTakColor());
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.RED);
             }else {
+                color = Color.GRAY;
                 tvPersenHadir.setTextColor(Color.GRAY);
                 ((GradientDrawable) mIcon.getBackground()).setColor(Color.LTGRAY);
                 //((GradientDrawable) tvPersenHadir.getBackground()).setColor(Color.GRAY);
@@ -170,7 +175,7 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    itemClickCallback.onItemClicked(groupList.get(getAdapterPosition()), mIcon.getText().toString());
+                    itemClickCallback.onItemClicked(groupList.get(getAdapterPosition()), mIcon.getText().toString(), color);
                 }
             });
 
@@ -193,6 +198,6 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Grou
     }
 
     public interface OnItemClickCallback{
-        void onItemClicked(GroupModel groupModel, String identity);
+        void onItemClicked(GroupModel groupModel, String identity, int color);
     }
 }

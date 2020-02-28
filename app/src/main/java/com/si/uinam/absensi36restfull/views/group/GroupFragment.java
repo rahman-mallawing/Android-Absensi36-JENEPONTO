@@ -99,11 +99,13 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
         groupListAdapter.setTglString(ApiTool.getTodayDateString(getActivity()));
         groupListAdapter.setItemClickCallback(new GroupListAdapter.OnItemClickCallback() {
             @Override
-            public void onItemClicked(GroupModel groupModel, String identity) {
+            public void onItemClicked(GroupModel groupModel, String identity, int color) {
                 IdentityGroup identityGroup = new IdentityGroup();
                 identityGroup.setGROUP_TYPE(IdentityGroup.TYPE.GROUP_IDENTITY);
                 identityGroup.setGroup_id(groupModel.getId());
                 identityGroup.setInfo(groupModel.getGrup());
+                identityGroup.setInitial(identity);
+                identityGroup.setColor(color);
                 identityGroup.setIdentity(identity);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + groupModel.getGrup(), Toast.LENGTH_SHORT).show();
                 Intent identityIntentPagingLib = new Intent(getActivity(), IdentityWithPageActivity.class);
