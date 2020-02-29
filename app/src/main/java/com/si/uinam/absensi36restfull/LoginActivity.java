@@ -7,6 +7,8 @@ import retrofit2.Response;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtPassword;
     private Button btnLogin;
     private static final String TAG = "LoginActivity";
+    private LinearLayout llKejati;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         edtUsername = findViewById(R.id.edt_username);
         edtPassword= findViewById(R.id.edt_password);
         btnLogin = findViewById(R.id.btn_login);
+        llKejati = findViewById(R.id.ll_kejati);
+        ((GradientDrawable) llKejati.getBackground()).setColor(Color.LTGRAY);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

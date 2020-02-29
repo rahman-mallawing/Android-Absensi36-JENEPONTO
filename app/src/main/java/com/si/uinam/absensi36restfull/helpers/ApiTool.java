@@ -25,6 +25,8 @@ public class ApiTool {
     public static int YELLOW_CUTI = Color.rgb(255, 104, 1);
     public static int BROWN = Color.rgb(176, 100, 51);
 
+
+
     public static String getTodayDateString(Context context) {
         if(ApiHelper.isTanggal(context)){
             //return ApiHelper.getTanggal(context);
@@ -37,6 +39,7 @@ public class ApiTool {
             text.setTextColor(Color.WHITE);
             //text.setHeight(100dp);
             toast.show();
+
             return ApiHelper.getTanggal(context);
         }
         String pattern = "yyyy-MM-dd";

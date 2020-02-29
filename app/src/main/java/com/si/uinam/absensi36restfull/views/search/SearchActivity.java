@@ -1,6 +1,7 @@
 package com.si.uinam.absensi36restfull.views.search;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
+import com.si.uinam.absensi36restfull.databinding.SearchActivityBinding;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.IdentityModel;
 import com.si.uinam.absensi36restfull.models.PaginationModel;
@@ -31,29 +33,23 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
 
     public static final String EXTRA_SEARCH = "SEARCH_QUERY";
     private SearchViewModel searchViewModel;
-    private ProgressBar progressBar;
     private SearchListAdapter searchListAdapter;
-    private RecyclerView rcvSearch;
-    private LinearLayout linearLayout;
-    private Button btnBack;
+    private SearchActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        //setContentView(R.layout.activity_search);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
 
-        progressBar = findViewById(R.id.searchProgressBar);
-        rcvSearch = findViewById(R.id.rcv_search);
-        linearLayout = findViewById(R.id.ll_no_result);
-        btnBack = findViewById(R.id.btn_no_data);
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setIndeterminate(true);
+        binding.searchProgressBar.setVisibility(View.VISIBLE);
+        binding.searchProgressBar.setIndeterminate(true);
 
-        linearLayout.setVisibility(View.VISIBLE);
+        binding.llNoResult.setVisibility(View.VISIBLE);
         String query = getIntent().getStringExtra(SearchActivity.EXTRA_SEARCH);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Cari pegawai: "+query);
-        rcvSearch.setLayoutManager(new LinearLayoutManager(this));
+        binding.rcvSearch.setLayoutManager(new LinearLayoutManager(this));
         searchListAdapter = new SearchListAdapter();
         searchListAdapter.setItemClickCallback(new SearchListAdapter.OnItemClickCallback() {
             @Override
@@ -70,15 +66,12 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
-                onSupportNavigateUp();
-            }
+        binding.btnNoData.setOnClickListener(view -> {
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
+            onSupportNavigateUp();
         });
         searchListAdapter.notifyDataSetChanged();
-        rcvSearch.setAdapter(searchListAdapter);
+        binding.rcvSearch.setAdapter(searchListAdapter);
         showLoading(true);
         searchViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(SearchViewModel.class);
         searchViewModel.getErrorMessage().observe(this, new Observer<String>() {
@@ -104,7 +97,7 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
                     Log.d("TES-SEARCH", identityModelPaginationModel.getArrayData().toString());
                     showLoading(false);
                     if(identityModelPaginationModel.getArrayData().isEmpty()){
-                        linearLayout.setVisibility(View.VISIBLE);
+                        binding.llNoResult.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -114,17 +107,17 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
     }
 
     private void showLoading(Boolean state) {
-        linearLayout.setVisibility(View.GONE);
-        if(progressBar == null) {
+        binding.llNoResult.setVisibility(View.GONE);
+        if(binding.searchProgressBar == null) {
             Log.d("TES-progressBar", "NULL NULL NULL");
             return;
         }
         if (state) {
-            progressBar.setVisibility(View.VISIBLE);
-            rcvSearch.setVisibility(View.GONE);
+            binding.searchProgressBar.setVisibility(View.VISIBLE);
+            binding.rcvSearch.setVisibility(View.GONE);
         } else {
-            progressBar.setVisibility(View.GONE);
-            rcvSearch.setVisibility(View.VISIBLE);
+            binding.searchProgressBar.setVisibility(View.GONE);
+            binding.rcvSearch.setVisibility(View.VISIBLE);
         }
     }
 

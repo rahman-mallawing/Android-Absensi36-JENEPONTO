@@ -70,9 +70,9 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
                         android:gravity="center"
-                        android:text="Pegawai"
+                        android:text="Peg"
                         android:textColor="@color/cardview_dark_background"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -84,7 +84,7 @@
                         android:background="@drawable/square_drawable"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="470"
+                        android:text="0"
                         android:textColor="@color/colorPegawai"
                         android:textStyle="bold" />
 
@@ -96,8 +96,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
-                        android:text="Group"
+                        android:textSize="16dp"
+                        android:text="Grup"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/cardview_dark_background"/>
@@ -112,8 +112,8 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
-                        android:textColor="@color/design_default_color_primary_dark"
-                        android:text="470" />
+                        android:textColor="#2FA1ED"
+                        android:text="0" />
 
                     <!-- Hadir -->
 
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Hadir"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -139,7 +139,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- TAK -->
@@ -149,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="TAK"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -166,7 +166,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- Dinas -->
@@ -176,7 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Dinas"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -193,7 +193,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- Cuti -->
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Cuti"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -220,7 +220,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- Izin -->
@@ -230,7 +230,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="2dp"
                         android:padding="5dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Izin"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -247,7 +247,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- Sakit -->
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Sakit"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -273,7 +273,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
                     <!-- Terlambat -->
                     <TextView
@@ -281,7 +281,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Terlambat"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -298,7 +298,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
 
                     <!-- CP -->
@@ -307,7 +307,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="2dp"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         android:text="Cepat Pulang"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -324,7 +324,7 @@
                         android:textStyle="bold"
                         android:background="@drawable/square_drawable"
                         android:textColor="@android:color/darker_gray"
-                        android:text="470" />
+                        android:text="0" />
 
                 </LinearLayout>
 

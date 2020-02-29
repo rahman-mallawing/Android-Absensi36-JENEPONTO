@@ -74,6 +74,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements AuthenticationListener, View.OnClickListener {
 
+    private boolean loginShow = false;
     private static final int REQUEST_CODE = 100;
     private HomeViewModel homeViewModel;
     private ProgressBar homeProgressBar;
@@ -135,6 +136,13 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
 //
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext(), getResources().getString(R.string.app_name) + "onResume: ", Toast.LENGTH_SHORT).show();
+        this.homeViewModel.loadStatistik(getActivity(),this, ApiTool.getTodayDateString(getActivity()));
     }
 
     private void fillStatistik(StatistikModel statistikModel) {
@@ -519,6 +527,10 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
 
     @Override
     public void onUserLoggedOut() {
+        if(loginShow){
+            return;
+        }
+        loginShow = true;
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
@@ -530,6 +542,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        loginShow = false;
         Log.d("TES-SUKSES", "login sukses");
         if(requestCode == HomeFragment.REQUEST_CODE){
             Log.d("TES-SUKSES", "request code passs");

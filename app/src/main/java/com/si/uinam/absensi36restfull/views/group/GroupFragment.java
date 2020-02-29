@@ -157,6 +157,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
 
     @Override
     public void onUserLoggedOut() {
+
         Log.d("TES-LOGOUT", "onUserLoggedOut");
         //showLoading(false);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
