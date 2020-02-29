@@ -29,7 +29,6 @@ import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.BestCategoryViewModel;
-import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.monthpresence.MonthPresenceActivity;
 
 import java.util.ArrayList;
@@ -113,7 +112,7 @@ public class BestCategoryFragment extends Fragment implements AuthenticationList
                 harianGroupModel.setNap(categoryModel.getNap());
                 harianGroupModel.setNama(categoryModel.getNama());
                 harianGroupModel.setFoto(categoryModel.getFoto());
-                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + categoryModel.getNama(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), categoryModel.getNama(), Toast.LENGTH_SHORT).show();
                 Intent presenceIntent = new Intent(getActivity(), MonthPresenceActivity.class);
                 presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
                 startActivity(presenceIntent);

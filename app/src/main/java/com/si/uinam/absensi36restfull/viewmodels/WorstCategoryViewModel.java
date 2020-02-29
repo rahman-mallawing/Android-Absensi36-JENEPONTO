@@ -14,7 +14,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CategoryViewModel extends ViewModel {
+public class WorstCategoryViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<CategoryModel>> categoryList = new MutableLiveData<>();
     private MutableLiveData<String> errorMessage = new MutableLiveData<>();

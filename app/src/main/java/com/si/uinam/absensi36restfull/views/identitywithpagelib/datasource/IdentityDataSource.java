@@ -4,11 +4,9 @@ package com.si.uinam.absensi36restfull.views.identitywithpagelib.datasource;
 import android.util.Log;
 
 
-import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.models.PaginationModel;
-import com.si.uinam.absensi36restfull.services.AuthenticationListener;
-import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identityparcel.IdentityGroup;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.AppController;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.utils.NetworkState;
 

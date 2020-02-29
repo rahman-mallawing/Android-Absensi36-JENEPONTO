@@ -1,10 +1,7 @@
-package com.si.uinam.absensi36restfull.views.identity;
+package com.si.uinam.absensi36restfull.views.identityparcel;
 
-import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.si.uinam.absensi36restfull.helpers.ApiTool;
 
 public class IdentityGroup implements Parcelable {
     private TYPE GROUP_TYPE;

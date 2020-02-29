@@ -5,7 +5,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
-import android.database.DatabaseUtils;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +18,7 @@ import com.si.uinam.absensi36restfull.databinding.IdentityActivityBinding;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
-import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identityparcel.IdentityGroup;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.AppController;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.adapter.IdentityPageListAdapter;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.utils.NetworkState;
@@ -79,7 +78,7 @@ public class IdentityWithPageActivity extends AppCompatActivity implements Authe
 
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
         binding.btnNoResult.setOnClickListener(view -> {
-            Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) , Toast.LENGTH_SHORT).show();
             onSupportNavigateUp();
         });
 
@@ -116,7 +115,7 @@ public class IdentityWithPageActivity extends AppCompatActivity implements Authe
         adapter.setItemClickCallback(new IdentityPageListAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(HarianGroupModel harianGroupModel) {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) + harianGroupModel.getGrup(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), harianGroupModel.getGrup(), Toast.LENGTH_SHORT).show();
                 Intent presenceIntent = new Intent(IdentityWithPageActivity.this, MonthPresenceActivity.class);
                 presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
                 startActivity(presenceIntent);

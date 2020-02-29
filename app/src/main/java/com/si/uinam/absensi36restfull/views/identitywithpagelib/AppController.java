@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
-import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identityparcel.IdentityGroup;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;

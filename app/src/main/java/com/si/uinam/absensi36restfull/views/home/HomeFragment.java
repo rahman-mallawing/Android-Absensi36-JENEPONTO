@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -47,30 +46,22 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Utils;
 import com.si.uinam.absensi36restfull.LoginActivity;
-import com.si.uinam.absensi36restfull.MyMarkerView;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.StaBulananTahunModel;
 import com.si.uinam.absensi36restfull.models.StaHarianBulanModel;
 import com.si.uinam.absensi36restfull.models.StatistikModel;
-import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.home.HomeViewModel;
 import com.si.uinam.absensi36restfull.views.checklogpage.ChecklogActivity;
-import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
-import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
-import com.si.uinam.absensi36restfull.views.identitypagination.IdentityPaginationActivity;
+import com.si.uinam.absensi36restfull.views.identityparcel.IdentityGroup;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.activity.IdentityWithPageActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment implements AuthenticationListener, View.OnClickListener {
 
@@ -271,6 +262,7 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
         xAxis.setAxisMaximum(31f);
         xAxis.setAxisMinimum(0f);
         xAxis.setDrawLimitLinesBehindData(true);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         float jumPegawai = (float)staHarianBulanModels.get(0).getJumlahPegawai();
 
@@ -480,27 +472,52 @@ public class HomeFragment extends Fragment implements AuthenticationListener, Vi
     }
 
     private void fillPieChart(StatistikModel stm){
-        float hadir, absen, dinas, cuti, izin, terlambat, total;
+        float hadir, absen, dinas, cuti, izin, terlambat, total, libur, pegawai;
+        String labelHadir = "Hadir";
+        String labelPie = "Kehadiran";
+        String labelAbsen = "TAK";
+        String labelDinas = "Dinas";
+        String labelCuti = "Cuti";
+        String labelIzin = "Izin";
+        String labelTerlambat = "Terlambat";
         hadir = stm.getHadir();
         absen = stm.getAbsen();
         dinas = stm.getDinasLuar();
         cuti = stm.getCuti();
         izin = stm.getIzin();
         terlambat = stm.getJumlahTerlambat();
+        libur = stm.getLibur();
+        pegawai = stm.getJumlahPegawai();
         total = hadir+absen+dinas+cuti+izin+terlambat;
-        PieEntry pe = new PieEntry((hadir/total*100), "Hadir");
-        Log.d("TOTAL", Float.toString(total));
+        ArrayList<PieEntry> entriesPie = new ArrayList<>();
+        int[] colors;
+        if(hadir==0 && (libur > (pegawai/2))){
+            hadir = stm.getLibur();
+            labelHadir = "HARI LIBUR";
+            labelPie = "HARI LIBUR";
+            entriesPie.add(new PieEntry((100), labelHadir));
+            colors = new int[] {ApiTool.BLUE_SMOOTH};
+            /*labelAbsen = "";
+            labelDinas = "";
+            labelCuti = "";
+            labelIzin = "";
+            labelTerlambat = "";*/
+        }else{
+            entriesPie.add(new PieEntry((absen/total*100), labelAbsen));
+            entriesPie.add(new PieEntry((cuti/total*100), labelCuti));
+            entriesPie.add(new PieEntry((terlambat/total*100), labelTerlambat));
+            entriesPie.add(new PieEntry((dinas/total*100), labelDinas));
+            entriesPie.add(new PieEntry((hadir/total*100), labelHadir));
+            entriesPie.add(new PieEntry((izin/total*100), labelIzin));
+            colors = new int[] {ApiTool.getTakColor(), ApiTool.GREEN_SMOOTH, ApiTool.BLUE_SMOOTH, ApiTool.getDinasColor(), ApiTool.getHadirColor(), ApiTool.getIzinColor()};
+        }
+        PieDataSet setPie = new PieDataSet(entriesPie, labelPie);
 
         //List<PieEntry> entriesPie = new ArrayList<>();
-        ArrayList<PieEntry> entriesPie = new ArrayList<>();
-        entriesPie.add(new PieEntry((absen/total*100), "TAK"));
-        entriesPie.add(new PieEntry((cuti/total*100), "Cuti"));
-        entriesPie.add(new PieEntry((terlambat/total*100), "Terlambat"));
-        entriesPie.add(new PieEntry((dinas/total*100), "Dinas"));
-        entriesPie.add(pe);
-        entriesPie.add(new PieEntry((izin/total*100), "Izin"));
-        PieDataSet setPie = new PieDataSet(entriesPie, "Kehadiran");
-        setPie.setColors(ColorTemplate.COLORFUL_COLORS);
+
+
+        //setPie.setColors(ColorTemplate.COLORFUL_COLORS);
+        setPie.setColors(colors);
         //setPie.set
         PieData dataPie = new PieData();
         dataPie.addDataSet(setPie);

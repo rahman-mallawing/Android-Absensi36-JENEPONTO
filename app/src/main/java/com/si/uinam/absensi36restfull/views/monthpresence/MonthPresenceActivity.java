@@ -128,7 +128,7 @@ public class MonthPresenceActivity extends AppCompatActivity implements Authenti
         monthPresenceListAdapter.setItemClickCallback(new MonthPresenceListAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(MonthPresenceModel monthPresenceModel) {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.app_name) + monthPresenceModel.getNama(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), monthPresenceModel.getNama(), Toast.LENGTH_SHORT).show();
             }
         });
         monthPresenceListAdapter.notifyDataSetChanged();

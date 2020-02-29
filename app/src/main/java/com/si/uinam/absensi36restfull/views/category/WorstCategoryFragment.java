@@ -28,11 +28,10 @@ import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.CategoryModel;
 import com.si.uinam.absensi36restfull.models.HarianGroupModel;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
-import com.si.uinam.absensi36restfull.viewmodels.CategoryViewModel;
+import com.si.uinam.absensi36restfull.viewmodels.WorstCategoryViewModel;
 import com.si.uinam.absensi36restfull.views.monthpresence.MonthPresenceActivity;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +40,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
 
 
     private static final int REQUEST_CODE = 100;
-    private CategoryViewModel categoryViewModel;
+    private WorstCategoryViewModel worstCategoryViewModel;
     private ProgressBar progressBar;
     private WorstCategoryListAdapter worstCategoryListAdapter;
     private RecyclerView rcvWorstCategory;
@@ -60,8 +59,8 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        categoryViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(CategoryViewModel.class);
-        categoryViewModel.getCategoryList().observe(this, new Observer<ArrayList<CategoryModel>>() {
+        worstCategoryViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(WorstCategoryViewModel.class);
+        worstCategoryViewModel.getCategoryList().observe(this, new Observer<ArrayList<CategoryModel>>() {
             @Override
             public void onChanged(ArrayList<CategoryModel> categoryModels) {
                 if(categoryModels != null){
@@ -70,7 +69,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                 }
             }
         });
-        categoryViewModel.getErrorMessage().observe(this, new Observer<String>() {
+        worstCategoryViewModel.getErrorMessage().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 String msg = "Error: " + s;
@@ -84,7 +83,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
             }
         });
         String tgl = ApiTool.getTodayDateString(getActivity());
-        categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
+        worstCategoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
         Log.d("TES-onCreate", "onCreateonCreateonCreateonCreate");
 
     }
@@ -94,8 +93,8 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_worst_category, container, false);
-        categoryViewModel =
-                ViewModelProviders.of(this).get(CategoryViewModel.class);
+        worstCategoryViewModel =
+                ViewModelProviders.of(this).get(WorstCategoryViewModel.class);
         View view = inflater.inflate(R.layout.fragment_worst_category, container, false);
         progressBar = view.findViewById(R.id.worst_category_ProgressBar);
         rcvWorstCategory = view.findViewById(R.id.rcv_worst_category);
@@ -111,7 +110,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                 harianGroupModel.setNap(categoryModel.getNap());
                 harianGroupModel.setNama(categoryModel.getNama());
                 harianGroupModel.setFoto(categoryModel.getFoto());
-                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + categoryModel.getNama(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), categoryModel.getNama(), Toast.LENGTH_SHORT).show();
                 Intent presenceIntent = new Intent(getActivity(), MonthPresenceActivity.class);
                 presenceIntent.putExtra(MonthPresenceActivity.EXTRA_HARIAN_GROUP_MODEL, harianGroupModel);
                 startActivity(presenceIntent);
@@ -153,7 +152,7 @@ public class WorstCategoryFragment extends Fragment implements AuthenticationLis
                 String name = data.getStringExtra(LoginActivity.EXTRA_NAME);
                 Toast.makeText(getContext(), getResources().getString(R.string.app_name) + name, Toast.LENGTH_SHORT).show();
                 String tgl = ApiTool.getTodayDateString(getActivity());
-                categoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
+                worstCategoryViewModel.loadWorstCategoryList(getActivity(),this, tgl);
             }
         }
     }

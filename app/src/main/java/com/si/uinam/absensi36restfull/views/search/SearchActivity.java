@@ -98,6 +98,7 @@ public class SearchActivity extends AppCompatActivity implements AuthenticationL
                     showLoading(false);
                     if(identityModelPaginationModel.getArrayData().isEmpty()){
                         binding.llNoResult.setVisibility(View.VISIBLE);
+                        binding.rcvSearch.setVisibility(View.GONE);
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.si.uinam.absensi36restfull;
+package com.si.uinam.absensi36restfull.views.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
+import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.views.home.HomeFragment;
 
 @SuppressLint("ViewConstructor")

@@ -1,6 +1,5 @@
 package com.si.uinam.absensi36restfull.views.group;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -26,17 +25,12 @@ import com.si.uinam.absensi36restfull.LoginActivity;
 import com.si.uinam.absensi36restfull.R;
 import com.si.uinam.absensi36restfull.helpers.ApiTool;
 import com.si.uinam.absensi36restfull.models.GroupModel;
-import com.si.uinam.absensi36restfull.services.App;
 import com.si.uinam.absensi36restfull.services.AuthenticationListener;
 import com.si.uinam.absensi36restfull.viewmodels.GroupViewModel;
-import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
-import com.si.uinam.absensi36restfull.views.identity.IdentityGroup;
+import com.si.uinam.absensi36restfull.views.identityparcel.IdentityGroup;
 import com.si.uinam.absensi36restfull.views.identitywithpagelib.activity.IdentityWithPageActivity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class GroupFragment extends Fragment implements AuthenticationListener {
 
@@ -107,7 +101,7 @@ public class GroupFragment extends Fragment implements AuthenticationListener {
                 identityGroup.setInitial(identity);
                 identityGroup.setColor(color);
                 identityGroup.setIdentity(identity);
-                Toast.makeText(getContext(), getResources().getString(R.string.app_name) + groupModel.getGrup(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), groupModel.getGrup(), Toast.LENGTH_SHORT).show();
                 Intent identityIntentPagingLib = new Intent(getActivity(), IdentityWithPageActivity.class);
                 identityIntentPagingLib.putExtra(IdentityWithPageActivity.EXTRA_IDENTITY, identityGroup);
                 startActivity(identityIntentPagingLib);

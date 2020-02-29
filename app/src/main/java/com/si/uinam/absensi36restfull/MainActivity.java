@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.si.uinam.absensi36restfull.helpers.ApiHelper;
 import com.si.uinam.absensi36restfull.services.App;
-import com.si.uinam.absensi36restfull.views.identity.IdentityActivity;
 import com.si.uinam.absensi36restfull.views.profile.ProfileFragment;
 import com.si.uinam.absensi36restfull.views.search.SearchActivity;
 
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.mnu_profile:
                 FragmentManager fm = getSupportFragmentManager();
-                ProfileFragment editNameDialogFragment = ProfileFragment.newInstance("Some Title");
+                ProfileFragment editNameDialogFragment = ProfileFragment.newInstance("Profile");
                 editNameDialogFragment.show(fm, "fragment_edit_name");
 
 
@@ -117,12 +116,11 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.mnu_set_realtime :
-                Toast.makeText(this,"Help",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Set REALTIME",Toast.LENGTH_SHORT).show();
                 ApiHelper.resetTanggal(getApplicationContext());
                 break;
             case R.id.mnu_logout :
-                Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
-                Log.d("TES-LOGOUT", "onUserLoggedOut");
+                Toast.makeText(this,"Logout Akun",Toast.LENGTH_SHORT).show();
                 App.getAppInstance(this,null)
                         .getSession().invalidate();
                 Intent loginIntent = new Intent(this, LoginActivity.class);
